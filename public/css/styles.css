@@ -1,0 +1,276 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background-color: #088ee8; /* Color calculado como mezcla */
+    color: #fff;
+    transition: all 0.3s;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 2; /* Agrega esto para que el menú siempre esté por encima */
+    top:-2;
+}
+
+.sidebar.minimized {
+    position: fixed;
+    width: 50px;
+    overflow-x: hidden;
+}
+
+/* Estilos para el toggle button */
+/* Estilos para el toggle button */
+.toggle-btn {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute; /* Cambiar a posición absoluta */
+    top: 10px; /* Colocar en la esquina superior */
+    left: 10px; /* Colocar en la esquina derecha */
+}
+
+.toggle-btn i {
+    font-size: 30px;
+}
+
+.sidebar.minimized button {
+    padding: 10px 0;
+}
+.sidebar.minimized button i{
+    font-size: 33px;
+}
+
+
+/* Estilos para el perfil */
+.profile {
+    text-align: center;
+    margin-top: 80px; /* Añadir margen superior para separar del botón */
+    transition: all 0.3s; /* Agregar transición para los cambios de tamaño */
+}
+/* Estilos para el nombre de usuario y la línea divisora */
+.profile h5 {
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+}
+/* Estilos para el nombre de usuario y la línea divisora */
+.profile p {
+    /* margin-top: -15px; */
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile p {
+    font-size: 14px; /* Tamaño de fuente para el tipo de usuario */
+}
+
+.profile .imgPerfil {
+    color: #fff;
+    width:60%;
+    margin:0 auto;
+    border: none;
+    border-radius: 10px;
+    padding:10px;
+    background-color:#17a0fb;
+   
+}
+
+/* Establecer un tamaño fijo para el cuadrado en el hover */
+.sidebar .imgPerfil:hover {
+    background-color: #1f9df1;
+    /* border-radius: 30%; Hacer que el cuadrado sea redondo */
+} 
+
+.sidebar .modal{
+   
+} 
+
+
+.divider {
+    height: 1px;
+    background-color: #fff;
+    margin: 10px 0;
+}
+
+.profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+.profile.minimized img {
+    width: 40px; /* Tamaño reducido */
+    height: 40px; /* Tamaño reducido */
+}
+
+.profile.minimized h5 {
+   display: none;
+}
+.profile.minimized p {
+    display: none;
+}
+
+.profile.minimized .imgPerfil {
+    display: none;
+}
+
+
+
+/*Para las opciones del menu*/
+
+.sidebar ul {
+    width: 100%;
+    /* background-color:#000; */
+    list-style: none;
+    padding: 10px;
+    left:0;
+}
+
+.sidebar li {
+    /* width: 100px; */
+    /* background-color:#b83ff0; */
+}
+
+/* Estilos para las opciones del menú */
+.sidebar a {   
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    display: flex; /* Usar flex para alinear íconos verticalmente */
+    align-items:flex-start; /* Alinear verticalmente los íconos en el centro */
+    white-space: nowrap;
+    padding: 10px 0; /* Ajustar el espacio vertical */
+    box-sizing: border-box; /* Incluir el padding en el ancho total */
+    position: relative; /* Agregar posición relativa */
+}
+
+/* Establecer un tamaño fijo para el cuadrado en el hover */
+.sidebar a:hover {
+    background-color: #1f9df1;
+    /* border-radius: 30%; Hacer que el cuadrado sea redondo */
+} 
+
+/* Estilos para los iconos */
+.sidebar a i {
+    padding-right: 10px;
+}
+
+/* Cambiar el tamaño de fuente de las opciones del menú al contraer */
+.sidebar.minimized a {
+    font-size: 25px; /* Tamaño de fuente reducido */
+    padding: 10px 0; /* Ajustar el espacio vertical */
+}
+/* .sidebar a > i{
+    padding-right: 9px;
+} */
+/* Cambiar el tamaño de fuente de las opciones del menú al contraer */
+
+/* .sidebar.minimized  ul {
+    width: 100%;
+    list-style: none;
+    padding: 10px;
+}*/
+
+.sidebar.minimized  a {
+    width: 100%;
+}
+
+.sidebar.minimized a > i {
+    padding-right: 18px;
+   
+}
+
+
+
+/* .sidebar.minimized a {
+    font-size: 25px; /* Tamaño de fuente reducido */
+    /* padding: 10px 0; */
+/* }  */
+
+
+
+/* a:hover {
+    background-color: #1f9df1;
+}  */
+
+
+/* Estilos para el submenú */
+/* Estilos para el submenú *//* Estilos para el submenú *//* Estilos para el submenú */
+.submenu {
+    /* display: none; */
+    display:flex;
+    flex-direction: column;
+}
+/*estilos del sub menu*/
+.submenu ul {
+    display: none;
+    width: 100%;
+    background-color: #24a2f5;
+    margin-right:10px ;
+    
+}
+
+/* Mostrar el submenú cuando la clase "active" está presente */
+.submenu ul.active {
+    display: block;
+}
+
+/* Estilos para la opción "Salir" */
+.menu li:nth-child(5) {
+    /* margin-top: 120px; Espacio adicional para acomodar el submenú */
+    
+}
+.sidebar.active {
+    width: 80px;
+}
+
+.sidebar.minimized .submenu ul {
+    background-color: transparent;
+}
+.sidebar.minimized .submenu ul a{
+    font-size: 18px; /* Tamaño de fuente reducido */
+}
+/* .sidebar.active .submenu {
+    display: block;
+} */
+
+.content {
+    margin-left:50px; /*250*/
+    padding: 20px;
+    z-index: 1; /* Agrega esto para que el contenido esté detrás del menú */
+}
+
+/* Estilo para la opción "Salir" */
+.logout {
+    /* margin-top:80px;Empujar hacia abajo hasta la parte inferior */
+}
+.logout {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute; /* Cambiar a posición absoluta */
+    top: 10px; /* Colocar en la esquina superior */
+    left: 10px; /* Colocar en la esquina derecha */
+}
+
+.logout i {
+    font-size: 20px;
+}
+
+.sidebar.minimized .logout a {
+    padding: 10px 0;
+}
+.sidebar.minimized .logout i{
+    font-size: 33px;
+}

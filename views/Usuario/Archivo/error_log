@@ -1,0 +1,7 @@
+[25-Jul-2023 03:28:06 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/idmgov2120/public_html/pid/views/partials/menusub.php on line 3
+[25-Jul-2023 03:30:04 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/idmgov2120/public_html/pid/views/partials/menusub.php on line 3
+[25-Jul-2023 03:33:01 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/idmgov2120/public_html/pid/views/partials/menusub.php on line 3
+[25-Jul-2023 16:00:12 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/idmgov2120/public_html/pid/views/partials/menusub.php on line 3
+[25-Jul-2023 16:06:19 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/idmgov2120/public_html/pid/views/partials/menusub.php on line 3
+[25-Jul-2023 16:09:49 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/idmgov2120/public_html/pid/views/partials/menusub.php on line 3
+[03-Aug-2023 01:23:23 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/idmgov2120/public_html/pid/views/partials/menusub.php on line 3

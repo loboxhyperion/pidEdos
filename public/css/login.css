@@ -1,0 +1,159 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins',sans-serif;
+    font-size: 10px;   
+    color: white;
+}
+.contenedor{
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("../img/fondo2.jpg"); 
+    background-size: cover;
+    background-position: center;
+    margin: 10% auto;
+    width:100%;
+    height: 100vh;
+    margin: 0 auto;
+
+     display:grid; 
+     grid-template-columns: 1fr;
+}
+.modal{
+    color:black;
+}
+
+/*  ---- ---- ---- LOGO ---- ---- ----*/
+/*  ---- ---- ---- LOGO ---- ---- ----*/
+/*  ---- ---- ---- LOGO ---- ---- ----*/
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.logo img{
+    width:100px;
+    height:100px;
+}
+
+.content{
+    /* max-width: 768px; */
+}
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:0.5em;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.login_input{
+    background: #747272;
+    padding: 5px;
+    opacity: 0.6;
+    display: flex;
+    justify-content: baseline;
+    width:75%;
+    border-radius: 100px ;
+    outline: none;
+}
+.login_input .box{
+    outline: none;
+    padding-left: 20px;
+}
+.login_input > i{
+    padding: 3.9px;
+    padding-left: 10px;
+    color: #fff;
+}
+.fas{
+    color: #fff;
+}
+.login_input > input{
+    background-color:transparent;
+    border: none;
+    color: #fff;
+}
+::placeholder{
+    color:#fff;
+}
+
+.login_submit{
+ width: 75%;
+ background-color: #2CA8FF;
+ color: #fff;
+ border: 1px solid #4FB9FF ;
+ border-radius: 100px;
+ padding: 5px;
+ margin-top: 50px;
+}
+
+/*  ---- ---- ---- PIE DE PAGINA ---- ---- ----*/
+/*  ---- ---- ---- PIE DE PAGINA ---- ---- ----*/
+/*  ---- ---- ---- PIE DE PAGINA ---- ---- ----*/
+.login_footer{
+    display: flex;
+    justify-content:center;
+    gap:1rem;
+    margin-bottom: 30px;
+}
+
+.login_btnNew{
+    text-decoration: none;
+    color:white;
+    font-size:0.8em;
+}
+
+
+@media screen and (min-width: 768px){
+    /*  ---- ---- ---- LOGO ---- ---- ----*/
+/*  ---- ---- ---- LOGO ---- ---- ----*/
+/*  ---- ---- ---- LOGO ---- ---- ----*/
+
+
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+
+.formulario{
+    font-size: 1.3em;
+}
+
+.login_input{
+    width:350px;
+}
+
+.login_submit{
+    width: 350px;
+}
+
+}
+
+
+@media screen and (min-width: 1300px){
+    /*  ---- ---- ---- LOGO ---- ---- ----*/
+/*  ---- ---- ---- LOGO ---- ---- ----*/
+/*  ---- ---- ---- LOGO ---- ---- ----*/
+
+.logo img{
+    width:150px;
+    height:150px;
+}
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+/*  ---- ---- ---- FORMULARIO ---- ---- ----*/
+
+.formulario{
+    font-size: 1.6em;
+}
+
+}

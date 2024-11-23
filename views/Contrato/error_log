@@ -1,0 +1,70 @@
+[14-Aug-2024 15:58:47 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:47 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:49 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:49 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:49 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:49 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:51 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:51 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:51 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:51 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:51 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:51 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:52 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:52 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:53 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:53 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:53 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:53 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:54 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:54 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:54 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:54 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:54 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:54 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:55 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:55 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:55 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:55 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:55 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:55 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:56 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:56 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:59 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:58:59 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:00 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:00 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:00 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:00 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:00 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:00 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:01 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:01 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:06 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:06 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:13 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:13 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:14 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:14 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:14 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:14 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:17 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:17 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:18 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:18 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:23 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 15:59:23 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:03:52 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:03:52 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:03:53 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:03:53 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:19:09 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:19:09 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:25:39 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:25:39 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:25:39 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:25:39 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:25:42 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:25:42 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:38:08 UTC] PHP Warning:  mysqli_connect(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12
+[14-Aug-2024 16:38:08 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/edosgov2/pid.edos.gov.co/db.php on line 12

@@ -1,0 +1,21 @@
+.decorado{
+    background: #e0e0e0;
+    border-radius: 25px;
+}
+.container{
+    margin:0 5%;
+}
+.barra_botones{
+    display: flex;
+    justify-content: end;
+}
+.barra_años{
+    display: flex;
+    justify-content: center;
+    gap:5px;
+}
+
+.barra_años a{
+    padding:30px;
+    font-size: 30px;
+}

@@ -1,0 +1,84 @@
+*{
+     margin:0;
+     padding:0;
+     box-sizing: border-box;
+}
+body{
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100vh;
+    overflow: hidden;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+}
+.login-container{
+    position:absolute;
+    width: 350px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background:#2C5364;
+    border-radius: 20px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 8px 8px 15px #0F2027,
+    -8px -8px 25px #203A43;  /*linea delgada que rodee alrededor*/
+}
+.login-container  img{
+    width:90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #fff;
+    margin-top: 20px;
+    box-shadow: 0px 0px 0px 1px #203A43,  /*linea delgada que rodee alrededor*/
+    0px 0px 0px 4px #2c5364,/*da un espacio como si se dibujara otro circulo*/
+    8px 8px 15px #0F2027,/*dar un sombreado hacia el lado derecho abajo los 15px es para el grado de difusion yno se vea tan oscuro*/
+    -8px -8px 15px #203A43; /*dar un sombreado hacia el lado izquierdo arriba los 15px es para el grado de difusion yno se vea tan oscuro*/
+    margin-bottom:20px;
+
+}
+.login-container p{
+    font-size:20px;
+    font-weight: 600;
+    color:#fff;
+    letter-spacing:2px;
+    margin-bottom: 20px;
+}
+.login-container .fields .data {
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #0F2027,
+    inset -8px -8px 8px #203A43;/*sombra desde adentro*/
+    margin-bottom: 20px;
+}
+.login-container .fields .data i{
+    color:#fff;
+    margin:20px 5px 20px 20px;
+}
+.login-container .fields .data input{
+    outline: none;
+    border:none;
+    background: none;
+    font-size: 15px;
+    padding: 20px 20px 20px 5px;
+    color: #fff;
+}
+.login-container  .btn-login{
+    outline:none;
+    border:none;
+    cursor:pointer;
+    width: 70%;
+    height: 50px;
+    font-size:20px;
+    font-weight:700;
+    border-radius: 30px;
+    transition: .5s;
+}
+.login-container  .btn-login:hover{
+    background: #203A43 ;
+    color:#fff;
+}
+.login-container  .btn-login:active{
+    background: #0F2027;
+}

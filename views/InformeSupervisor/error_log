@@ -1,0 +1,20 @@
+[19-Jan-2023 02:28:29 UTC] PHP Parse error:  syntax error, unexpected '"?>"' (T_CONSTANT_ENCAPSED_STRING), expecting ';' or ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/editar.php on line 85
+[10-Jul-2023 05:00:22 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:00:26 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:00:36 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:00:48 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:01:09 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:01:09 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:01:10 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:01:30 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:01:32 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:01:33 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 132
+[10-Jul-2023 05:11:03 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 18
+[10-Jul-2023 05:14:15 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 18
+[10-Jul-2023 05:14:16 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 18
+[10-Jul-2023 05:14:17 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 18
+[10-Jul-2023 05:15:07 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/idmgov2120/public_html/pid/views/InformeSupervisor/nuevo.php on line 18
+[12-Jul-2023 14:12:26 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/idmgov2120/public_html/pid/views/InformeSupervisor/generarExcel.php on line 25
+[12-Jul-2023 14:13:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/idmgov2120/public_html/pid/views/InformeSupervisor/generarExcel.php on line 25
+[06-Oct-2024 05:52:52 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/edosgov2/pid.edos.gov.co/views/InformeSupervisor/generarExcel.php on line 11
+[06-Oct-2024 05:52:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/edosgov2/pid.edos.gov.co/views/InformeSupervisor/generarExcel.php on line 25

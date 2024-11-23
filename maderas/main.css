@@ -1,0 +1,340 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Poppins',sans-serif;
+    color:#fff;
+}
+a{
+    text-decoration: none;
+    color:#000;
+}
+.contenedor{
+    width:100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 111px;
+    grid-template-areas: "menu"
+                         "servicios"
+                         "nosotros"
+                         "contacto"
+                         "footer";
+    transition: all .3s ease;
+}
+/*  ---- ---- ---- MENU ---- ---- ----*/
+/*  ---- ---- ---- MENU ---- ---- ----*/
+/*  ---- ---- ---- MENU ---- ---- ----*/
+
+.menu-fijo{
+    
+}
+.menu{
+    grid-area: menu;
+    background:#fff;
+    width: 100%;
+    position:fixed;
+    top:-10px;
+    left:0;
+    
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    grid-template-areas: "logo submenu";
+    opacity: 0.8;
+}
+
+.menu-logo{
+    grid-area: logo;
+    padding: 2px 5px;
+}
+.menu-logo img{
+    width:100%;
+    height: 110px;
+    border-radius: 10px;
+}
+.menu-items{
+    grid-area: submenu;
+    display: inline-block;
+    margin-left: 70px;
+}
+.menu-items a{
+    color:#A55E4A;
+    font-size: 18px;
+    padding: 9px;
+    border-radius: 10px;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.menu-items a:hover{
+    background: #FFB121;
+    color:#fff;
+}
+
+/*  ---- ---- ----Nosotros---- ---- ----*/
+/*  ---- ---- ----Nosotros---- ---- ----*/
+/*  ---- ---- ----Nosotros---- ---- ----*/
+
+.nosotros{
+    grid-area: nosotros;
+    /*padding-top: 30px;*/
+    background: #f8f1f1;
+    text-align: justify;
+
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-areas:"imagen info"
+                        "misvis misvis";
+    padding-bottom: 50px;
+}
+
+.nosotros, h1{
+    /*color:#A55E4A;*/
+    text-align: center;
+}
+
+.nosotros  hr{
+    width:130px;
+    margin-top: -1px;
+    margin:0 auto;
+    border: 1px solid #FFB121;
+}
+
+.nosotros .nosotros-imagen{
+    grid-area: imagen;
+}
+
+.nosotros .nosotros-imagen img{
+    width:100%;
+    height: 100%;
+    display:block;/*para evitar problemas que las img generan margenes inferiores*/
+    max-width:632px;
+   /* border-radius: 10px;*/
+    margin: 0 auto;/*para que un elemento se centre debe tener un width debe ser  en bloque y un margin auto*/
+}
+
+.nosotros .nosotros-info{
+    background: #A55E4A;
+    padding: 60px;
+}
+.nosotros .nosotros-info p{
+    grid-area: info;
+    padding-top: 15px;
+    color:#fff;
+}
+
+.nosotros .misvis{
+    grid-area: misvis ;
+    background: #3B3A3A;
+    padding: 50px 20px;
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:10px;
+}
+
+.nosotros p{
+    padding-top: 15px;
+}
+
+.nosotros .misvis .mision,.vision{
+    padding: 40px 20px;
+}
+
+/*  ---- ---- ---- Servicios---- ---- ----*/
+/*  ---- ---- ---- Servicios---- ---- ----*/
+/*  ---- ---- ---- Servicios---- ---- ----*/
+
+.servicios{
+    grid-area: servicios;
+    padding-top: 30px;
+    background: #3B3A3A;
+    text-align: center;
+
+    display:grid;
+    grid-template-areas:"titulo titulo titulo"
+                        "fabricacion instalacion refaccion";
+    
+    padding-bottom: 50px;
+
+}
+
+.servicios .servicios-titulo{
+    grid-area: titulo;
+}
+
+.servicios .servicios-items .item1{
+    grid-area: fabricacion;
+}
+
+.servicios .servicios-items .item1{
+    grid-area: instalacion;
+}
+
+.servicios .servicios-items .item1{
+    grid-area: refaccion;
+}
+.servicios .servicios-titulo hr{
+    width:120px;
+    margin: 0 auto;
+    border: 1px solid #FFB121;
+}
+
+.servicios .servicios-titulo{
+    padding-bottom: 20px;
+}
+
+.servicios .servicios-items figure {
+    font-size: 65px;
+}
+
+.servicios .servicios-items p{
+    font-size: 15px;
+    color: #FFB121;
+}
+
+
+
+
+/*  ---- ---- ----Contacto---- ---- ----*/
+/*  ---- ---- ----Contacto---- ---- ----*/
+/*  ---- ---- ----Contacto---- ---- ----*/
+
+.contacto{
+    grid-area: contacto;
+    background: #f8f1f1;
+    text-align: center;
+    padding-bottom: 50px;
+    color:#A55E4A;
+}
+
+.contacto .contacto-datos{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    padding-top: 30px;
+}
+
+ .contacto .contacto-titulo{
+    padding-bottom: 20px;
+ }
+
+ .contacto .contacto-titulo hr{
+    width:140px;
+    margin: 0 auto;
+    border: 1px solid #FFB121;
+ }
+
+ .contacto .contacto-datos figure .fas{
+    font-size: 30px;
+    margin-right: 20px;
+ }
+
+
+/*  ---- ---- ----FOOTER---- ---- ----*/
+/*  ---- ---- ----FOOTER---- ---- ----*/
+/*  ---- ---- ----FOOTER---- ---- ----*/
+
+.footer{
+    grid-area: footer;
+    padding:40px;
+    background:#3B3A3A;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+@media screen and (max-width: 576px){
+
+    .contenedor{
+        grid-template-rows: 150px;
+    }
+
+    .menu{ 
+        grid-template-columns: 1fr;
+        grid-template-areas: "logo"
+                             "submenu";
+        gap: 0;
+        opacity: 0.8;
+    }
+
+    .menu-items{
+        margin-left: 8px;
+    }
+    .menu-items a{
+        margin-left: 0px;
+    }
+
+    .nosotros{
+        grid-template-columns: repeat(1,1fr);
+        grid-template-areas:"imagen" 
+                            "info"
+                            "misvis";
+        font-size: 14px;
+    }
+
+    .nosotros .misvis{
+        grid-template-columns: repeat(1,1fr);
+        padding: 30px 10px;
+    }
+
+    .nosotros .misvis .nosotros-vision{
+        padding-top: 10px;
+    }
+
+    .nosotros .nosotros-info{
+        padding: 30px 10px;
+    }
+    
+    .servicios{
+        display:grid;
+        grid-template-columns: 33% 33% 34%;
+        grid-template-areas:"titulo titulo titulo"
+                            "fabricacion instalacion refaccion";
+        
+        padding-bottom: 50px;
+    
+    }
+ 
+    .servicios .servicios-titulo{
+        padding-bottom: 20px;
+    }
+    
+    .servicios .servicios-items figure {
+        font-size: 30px;
+    }
+    
+    .servicios .servicios-items p{
+        font-size: 10px;
+        color: #FFB121;
+    }
+
+    .contacto{
+        text-align: left;
+        padding: 0 30px;
+    }
+
+    .contacto .contacto-titulo{
+        text-align: center;
+    }
+
+    .mapa{
+        width:100%;
+        height:200px;
+    }
+
+    .contacto .contacto-datos{
+        grid-template-columns: repeat(1,1fr);
+        grid-template-rows: repeat(3,50px);
+    }
+
+    .contacto .contacto-datos figure .fas{
+        font-size: 15px;
+     }
+}
+
+
+
+
+
