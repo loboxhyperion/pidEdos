@@ -1,10 +1,5 @@
 <?php
 
-$fechaInicio = $_POST['fecha_ini'];
-$fechaFin = $_POST['fecha_fin'];
-$valorMes= $_POST['valorMes'];
-$valorDia= $valorMes / 30;
-
 function esBisiesto($año){
     return ($año % 4 == 0 && ($año % 100 != 0 || $año % 400 == 0));
 }
@@ -45,12 +40,15 @@ function calcularDiasRango($inicio, $fin) {
     return $diasTotales;
 }
 
-function generarActas($inicio, $fin,$diasTotales) {
+function generarActas($inicio, $fin,$diasTotales,$valorDia,$presupuesto) {
 
     $proyeccionActas = [];
     $fechaInicioActa = new DateTime($inicio);
     $diasRestantes = $diasTotales;
     $actaNumero = 1;
+
+    $saldo = $presupuesto;
+    $acumulado = 0;
     
     $diaInicioEnero = (int)$fechaInicioActa->format('m') == 1 ? (int)$fechaInicioActa->format('d') : 0; // manejo especial dias 29 y 30 enero
 
@@ -60,6 +58,8 @@ function generarActas($inicio, $fin,$diasTotales) {
         $diasValidos = 1;
         $repetirDia = diasExtraFebrero((int)$fechaInicioActa->format('Y'));//para los días febreros
         $esBisiesto = $repetirDia ;
+
+        
 
 
         while ($diasValidos <= $diasActa) {
@@ -94,8 +94,11 @@ function generarActas($inicio, $fin,$diasTotales) {
             }    
             
         }
-
-         // fecha de inicio en enero con dias 29 y 30 
+        // TO-DO calcula el presupuesto del acta
+        $valorActa = calcularPresupuesto($diasActa, $valorDia);
+        $acumulado += $valorActa; 
+        $saldo -= $valorActa;
+        // fecha de inicio en enero con dias 29 y 30 
         //  solo escluye en el año bisiesto el 29
         $validarDiaEnero =    ($esBisiesto == 1 && $fechaInicioActa->format('d') == 30) || ($esBisiesto != 1 && $fechaInicioActa->format('m') == 1 && 
         $fechaInicioActa->format('d') == 29   ||  $fechaInicioActa->format('d') == 30) ? 1 : 0;
@@ -106,7 +109,13 @@ function generarActas($inicio, $fin,$diasTotales) {
         $proyeccionActas[] = [
             'acta' => $actaNumero,
             'inicio' => $fechaInicioActa->format('Y-m-d'),
-            'fin' => $fechaFinActa->format('Y-m-d')
+            'fin' => $fechaFinActa->format('Y-m-d'),
+            'dias' => $diasActa,
+            'valorDia' => $valorDia,
+            'valorMes' => $valorActa,
+            'acumulado' => $acumulado,
+            'saldo' => $saldo,
+            'prioridad' => 'Inicial'
         ];
 
 
@@ -125,24 +134,9 @@ function generarActas($inicio, $fin,$diasTotales) {
     return $proyeccionActas;
 }
 
-
-$dias = calcularDiasRango($fechaInicio, $fechaFin);
-$totalActas = ceil($dias/30);
-$proyeccion = generarActas($fechaInicio, $fechaFin,$dias);
-
-
-echo "El número de días en el rango, excluyendo los días 31 y sumando 2 días a febrero, es<strong>: $dias</strong>días.";
-
-// Mostrar resultados
-echo "<br>Número total de actas: $totalActas <br>";
-
-// Mostrar resultados
-echo "Proyección de actas:\n<br>";
-foreach ($proyeccion as $acta) {
-    echo "Acta {$acta['acta']}: desde {$acta['inicio']} hasta {$acta['fin']}<br>";
+function calcularPresupuesto($diasActa,$valorDia){
+    return $valorDia * $diasActa;;
 }
-
-
 
 
 ?>

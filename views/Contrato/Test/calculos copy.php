@@ -5,8 +5,12 @@ $fechaFin = $_POST['fecha_fin'];
 $valorMes= $_POST['valorMes'];
 $valorDia= $valorMes / 30;
 
-function diasExtraFebrero($año){
-    return ($año % 4 == 0 && ($año % 100 != 0 || $año % 400 == 0)) ? 1 : 2;
+function esBisiesto($año){
+    return ($año % 4 == 0 && ($año % 100 != 0 || $año % 400 == 0));
+}
+
+function diasExtraFebrero($año) {
+    return esBisiesto($año) ? 1 : 2;
 }
 
 function calcularDiasRango($inicio, $fin) {
@@ -41,12 +45,16 @@ function calcularDiasRango($inicio, $fin) {
     return $diasTotales;
 }
 
-function generarActas($inicio, $fin,$diasTotales) {
+function generarActas($inicio, $fin,$diasTotales,$valorDia,$presupuesto) {
 
     $proyeccionActas = [];
     $fechaInicioActa = new DateTime($inicio);
     $diasRestantes = $diasTotales;
     $actaNumero = 1;
+
+    $saldo = $presupuesto;
+    $acumulado = 0;
+    
     $diaInicioEnero = (int)$fechaInicioActa->format('m') == 1 ? (int)$fechaInicioActa->format('d') : 0; // manejo especial dias 29 y 30 enero
 
     while ($diasRestantes > 0) {
@@ -56,11 +64,13 @@ function generarActas($inicio, $fin,$diasTotales) {
         $repetirDia = diasExtraFebrero((int)$fechaInicioActa->format('Y'));//para los días febreros
         $esBisiesto = $repetirDia ;
 
+        
+
 
         while ($diasValidos <= $diasActa) {
             $dia = (int)$fechaFinActa->format('d');
             $mes = (int)$fechaFinActa->format('m');
-            echo $diasValidos."validos ".$fechaFinActa->format('d-m-Y')."<br>";
+            // echo $diasValidos."validos ".$fechaFinActa->format('d-m-Y')."<br>";
             $diasASumar = 1;
 
 
@@ -89,11 +99,14 @@ function generarActas($inicio, $fin,$diasTotales) {
             }    
             
         }
-
-         // fecha de inicio en enero con dias 29 y 30 
+        // TO-DO calcula el presupuesto del acta
+        $valorActa = calcularPresupuesto($diasActa, $valorDia);
+        $acumulado += $valorActa; 
+        $saldo -= $valorActa;
+        // fecha de inicio en enero con dias 29 y 30 
         //  solo escluye en el año bisiesto el 29
         $validarDiaEnero =    ($esBisiesto == 1 && $fechaInicioActa->format('d') == 30) || ($esBisiesto != 1 && $fechaInicioActa->format('m') == 1 && 
-        ($fechaInicioActa->format('d') == 29   ||  $fechaInicioActa->format('d') == 30)) ? 1 : 0;
+        $fechaInicioActa->format('d') == 29   ||  $fechaInicioActa->format('d') == 30) ? 1 : 0;
         // $validarDiaEnero = $fechaInicioActa->format('m') == 1 && ($fechaInicioActa->format('d') == 29   ||  $fechaInicioActa->format('d') == 30) 
         // ? 1 : 0;
         
@@ -101,7 +114,13 @@ function generarActas($inicio, $fin,$diasTotales) {
         $proyeccionActas[] = [
             'acta' => $actaNumero,
             'inicio' => $fechaInicioActa->format('Y-m-d'),
-            'fin' => $fechaFinActa->format('Y-m-d')
+            'fin' => $fechaFinActa->format('Y-m-d'),
+            'dias' => $diasActa,
+            'valorDia' => number_format($valorDia,2),
+            'valorMes' => number_format($valorActa,2),
+            'acumulado' => number_format($acumulado, 2),
+            'saldo' => number_format($saldo, 2),
+            ''
         ];
 
 
@@ -120,25 +139,36 @@ function generarActas($inicio, $fin,$diasTotales) {
     return $proyeccionActas;
 }
 
-
+function calcularPresupuesto($diasActa,$valorDia){
+    return $valorDia * $diasActa;;
+}
 $dias = calcularDiasRango($fechaInicio, $fechaFin);
-$resultado = generarActas($fechaInicio, $fechaFin,$dias);
+$totalActas = ceil($dias/30);
+
+//calculos presupuesto
+$presupuesto = $valorDia * $dias;
+$saldo = $dias  * $valorDia;
+
+// echo "<br>". $dias;
+// echo "<br>". $actasNum;
+
+$proyeccion = generarActas($fechaInicio, $fechaFin,$dias,$valorDia,$presupuesto);
 
 
 echo "El número de días en el rango, excluyendo los días 31 y sumando 2 días a febrero, es<strong>: $dias</strong>días.";
 
 // Mostrar resultados
-// echo "<br>Número total de actas: {$resultado['numeroActas']}\n";
-// echo "<br>Proyección de actas:\n";
-// foreach ($resultado['actas'] as $acta) {
-//     echo "<br>Acta {$acta['acta']}: desde {$acta['inicio']} hasta {$acta['fin']}\n";
-// }
+echo "<br><strong>Número total de actas:</strong> $totalActas";
 
 // Mostrar resultados
-echo "Proyección de actas:\n<br>";
-foreach ($resultado as $acta) {
-    echo "Acta {$acta['acta']}: desde {$acta['inicio']} hasta {$acta['fin']}<br>";
+echo "<br><strong>Prsupuesto:</strong>".number_format($presupuesto,2)."<br>";
+
+// Mostrar resultados
+echo "<strong>Proyección de actas:</strong>\n<br>";
+foreach ($proyeccion as $acta) {
+    echo "Acta {$acta['acta']}: desde {$acta['inicio']} hasta {$acta['fin']} dias: {$acta['dias']} valordia: {$acta['valorDia']} valorMes: {$acta['valorMes']} Acumulado: {$acta['acumulado']} Saldo: {$acta['saldo']}<br>";
 }
+
 
 
 
