@@ -56,69 +56,91 @@ $fecha_suspension = date("d",strtotime("-1 days"))."-".date("m")."-".date("Y");
 $fecha_reinicio = date("d",strtotime("-1 days"))."-".date("m")."-".date("Y");
 
 
-//Calculo de dias y de actas del contrato
-//la diferencia entre fechas en segundos
-function actas_dias($fecha_ini,$fecha_fin,$valorDia){
-    global $diasUltimoMes,$actasNum;
-    $secs = strtotime($fecha_fin) - strtotime($fecha_ini);
-    $diasUltimoMes = date("d",strtotime($fecha_fin)) == 31 ? 30 : date("d",strtotime($fecha_fin));
-    $actasTemp =  (round($secs /86400))/30;
-    $actasTemp2 =  round($secs /86400)+1;
-    echo "<br> perdiodo de inicio :".  $fecha_ini . " // ". "perdiodo de fin:". $fecha_fin;
-    echo "<br> dias totales :".   $actasTemp2 ;
-    //addicion de 2 días si el contrato inicia en enero o febrero
-    if((intval(date('m', strtotime($fecha_ini))) == 1 && $actasTemp2 >= 58) || (intval(date('m', strtotime($fecha_ini))) == 2)){
-        $actasTemp2 =  $actasTemp2 + 2;
+function calcularDiasRango($inicio, $fin) {
+    $fechaInicio = new DateTime($inicio);
+    $fechaFin = new DateTime($fin);
+    $fechaFin->modify('+1 day'); // Incluimos el día final en el rango
+
+    $diasTotales = 0;
+    $febreroSumado = false; // Control para sumar los 2 días solo una vez
+
+    while ($fechaInicio < $fechaFin) {
+        
+         // convierte la fecha en un formato leible 
+        // testeo
+        // $fechaComoString = $fechaInicio->format('Y-m-d');
+        // echo "<br>". $fechaComoString;
+
+
+        $año = (int)$fechaInicio->format('Y');
+        $mes = (int)$fechaInicio->format('m');
+        $dia = (int)$fechaInicio->format('d');
+
+        // Excluir días 31
+        if ($dia != 31) {
+            $diasTotales++;
+
+            // Agregar 2 días adicionales a febrero
+            if ($mes == 2 && !$febreroSumado) {
+                // determina si es bisiesto seria 1 dia si no lo es son 2
+                $diasExtraFebrero = ($año % 4 == 0 && ($año % 100 != 0 || $año % 400 == 0)) ? 1 : 2;
+                $diasTotales += $diasExtraFebrero;
+                $febreroSumado = true;
+            }
+        }
+       
+
+        $fechaInicio->modify('+1 day'); // Avanzar al siguiente día
+
+    
     }
-    echo "<br> dias totales sumando febrero :".   $actasTemp2 ;
-    echo "<br> Actas Temporales ".   $actasTemp ;
-    $actaFraccion =  $actasTemp - intval($actasTemp);
-    $actasNum = $actaFraccion < 0.1 ? intval($actasTemp) : ceil($actasTemp);//operador ternario solo valido hasta 4 dias
-    echo "<br> actas: ".   $actasNum ;
-    echo "<br> ----------------------apartado para descontar los 31------------------- ";
-    $diasDesc = dias_descontar($fecha_ini,$fecha_fin,$actasNum,$valorDia);
- 
-    echo "<br> descontados:". $diasDesc; 
-    return $actasTemp2 - $diasDesc ;
+
+    return $diasTotales;
 }
 
-function dias_descontar($fecha_ini,$fecha_fin,$actas,$valorDia){
-    //Suma los dias a descontar
-    $mesIni = 0;
-    /*if(intval(date('d', strtotime($fecha_ini))) == 1 ){
-        $mesIni--;
-        echo "<br> pase"; 
-    }*/
-    for($i = 1; $i<=$actas; $i++){
-        //if($i < $actas  ||  intval(date('t', strtotime($fecha_fin))) /*!=*/== 31 ){
-        if($i <= $actas && intval(date('d', strtotime($fecha_ini))) != 1 && intval(date('m', strtotime($fecha_ini))) != 12){
-            echo "<br> mes:".  $fecha_ini; 
-            $mesIni += intval(date('t', strtotime($fecha_ini))) == 31 ? 1 : 0;
-            echo "<br> mes:".  $mesIni; 
-            $fecha_ini = date('Y-m-d', strtotime($fecha_ini."+ 1 months"));
-        }else if($i < $actas && intval(date('d', strtotime($fecha_ini))) == 1){
-            echo "<br> mes:".  $fecha_ini; 
-            $mesIni += intval(date('t', strtotime($fecha_ini))) == 31 ? 1 : 0;
-            echo "<br> mes:".  $mesIni; 
-            $fecha_ini = date('Y-m-d', strtotime($fecha_ini."+ 1 months"));
-        }else{       
-            echo "<br> perdiodo de inicio :".  $fecha_ini . " // ". "perdiodo de fin:". $fecha_fin;
-        }
-        //sección para evitar que sumen días
-        //cuando en la última acta el número de días del mes sea igual a 31
-        if($i == $actas  && intval(date('d', strtotime($fecha_fin))) == 31 ){
-            $mesIni--;
-        }
-        //cuando sea la ultima acta y el mes sea diciembre evita que sume un dia para descontar
-        /*if($i == $actas && intval(date('m', strtotime($fecha_fin))) == 12 ){
-            $mesIni--;
-        }*/
+function generarActas($inicio, $fin, $diasTotales) {
+
+    // Calculamos el número de actas completas de 30 días
+    $numeroActas = intdiv($diasTotales, 30);
+    $diasRestantes = $diasTotales % 30;
+
+    // Proyección de fechas para cada acta
+    $proyeccionActas = [];
+    $fechaInicioActa = new DateTime($inicio);
+
+    for ($i = 0; $i < $numeroActas; $i++) {
+        $fechaFinActa = clone $fechaInicioActa;
+        $fechaFinActa->modify('+29 days'); // Cada acta tiene 30 días
+        $proyeccionActas[] = [
+            'acta' => $i + 1,
+            'inicio' => $fechaInicioActa->format('Y-m-d'),
+            'fin' => $fechaFinActa->format('Y-m-d')
+        ];
+        $fechaInicioActa = clone $fechaFinActa;
+        $fechaInicioActa->modify('+1 day'); // La siguiente acta inicia al día siguiente
     }
-    return $mesIni ;
+
+    // Si quedan días restantes, agregamos una última acta con esos días
+    if ($diasRestantes > 0) {
+        $fechaFinActa = clone $fechaInicioActa;
+        $fechaFinActa->modify('+' . ($diasRestantes - 1) . ' days');
+        $proyeccionActas[] = [
+            'acta' => $numeroActas + 1,
+            'inicio' => $fechaInicioActa->format('Y-m-d'),
+            'fin' => $fechaFinActa->format('Y-m-d')
+        ];
+        $numeroActas++; // Contamos la última acta
+    }
+
+    return [
+        'numeroActas' => $numeroActas,
+        'actas' => $proyeccionActas
+    ];
 }
 
 //calculos presupuesto
 $dias = actas_dias($fecha_ini,$fecha_fin,$valorDia);
+$actasNum = 
 //$valorMes = $valorDia * 30;
 $valor_contrato = $valorDia * $dias;
 $acomulado = 0;
@@ -238,29 +260,29 @@ if($result){
             header("location:listar.php");
         }else{
             ?>
-            <?php
+<?php
             ?>
-            <h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LA PROYECCION</h1>
-            <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LA PROYECCION</h1>
+<?php
         } 
     }else{
         ?>
-        <?php
+<?php
         ?>
-        <h1 class="bad">ERROR EN LA AUTENTIFICACION DEL LAS RETENCIONES</h1>
-        <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION DEL LAS RETENCIONES</h1>
+<?php
     }      
 }else{
     ?>
-    <?php
+<?php
     if(mysqli_error($conexion)){
         $message = "El contrato ya ha sido creado";
         header("location:nuevo.php?mensaje=".$message);
         //echo "<br>". $message ;
     }
     ?>
-    <h1 class="bad">ERROR EN LA AUTENTIFICACION DEL CONTRATO</h1>
-    <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION DEL CONTRATO</h1>
+<?php
 }
 //mysqli_free_result($resultado);
 ob_end_flush();
