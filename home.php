@@ -24,6 +24,7 @@ $_SESSION['rutaHome'] = "home.php";
 $_SESSION['rutaUsuario'] = "views/Usuario/listar.php";
 $_SESSION['rutaCategoria'] = "views/CategoriaProfesional/listar.php";
 $_SESSION['rutaRetencion'] = "views/Retencion/listar.php";
+$_SESSION['rutaConfiguracion'] = "views/Configuracion/listar.php";
 $_SESSION['rutaActasPendientes'] = "views/Contrato/Acta/actasPendientes.php";
 $_SESSION['rutaAlcancesGlobales'] = "views/Contrato/alcancesGlobales.php";
 $_SESSION['rutaInformeSupervisor'] = "views/InformeSupervisor/listar.php";
@@ -33,6 +34,8 @@ $_SESSION['rutaPerfil'] = "actualizarPerfil.php";
 $_SESSION['rutaCerrarSesion'] = "cerrar_sesion.php";
 
 include('views/partials/menu.php');
+
+
 
 ?>
 <style>
@@ -44,7 +47,14 @@ include 'public/css/styles.css';
 </style>
 <div class="container">
     <hr>
-    <h1 class="text-center">Bienvenido al Sistema : <?php echo $varsesion["nombre"] . ' ' . $varsesion["apellidos"] ?>
+    <?php 
+        // foreach($_SESSION['config'] as $config){
+        //     echo "<br>".$config["nombre"];
+        //     echo "<br>".$config["tipo"];
+        // }
+     ?>
+    <h1 class="text-center">Bienvenido al Sistema :
+        <?php echo $varsesion["nombre"] . ' ' . $varsesion["apellidos"] . '' ?>
     </h1>
     <hr>
     <h5 class="text-center">Seleccione El año que desea visualizar:</h5>
