@@ -53,6 +53,7 @@ $fecha_necesidad = $_POST['fecha_necesidad'];
 $fecha_firma = $_POST['fecha_firma'];
 
 $idSupervisor2 = $_POST['idSupervisor2'] ;
+$idOrdenador = $_POST['idOrdenador'];
 
 echo $modificar;
 
@@ -71,12 +72,12 @@ $proyeccion = generarActas($fechaInicio, $fechaFin,$dias,$valorDia,$presupuesto)
 if($modificar == "Si"){
     $query = "UPDATE `contrato` SET `registro_pptal`='$registro_pptal',`rubro`='$rubro',`disp_presupuestal`='$disp_presupuestal',`years`='$years',`num_contrato`='$num_contrato',`fecha_delegacion`='$fecha_delegacion',`num_delegacion`='$num_delegacion',`area`='$area',
                                 `valor_contrato`='$valor_contrato',`objeto`='$objeto',`forma_pago`='$forma_pago',`entregables`='$entregables',`salud`='$salud',`pension`='$pension',`arl`='$arl',`fecha_activacion`='$fecha_activacion',`observaciones`='$observaciones',
-                                `num_actas`='$totalActas',`idUsuario`='$idUsuario',`idSupervisor`='$idSupervisor',`modalidad`='$modalidad',`fecha_necesidad`='$fecha_necesidad',`fecha_firma`='$fecha_firma',`idSupervisor2`='$idSupervisor2'  WHERE id = $idContrato";
+                                `num_actas`='$totalActas',`idUsuario`='$idUsuario',`idSupervisor`='$idSupervisor',`modalidad`='$modalidad',`fecha_necesidad`='$fecha_necesidad',`fecha_firma`='$fecha_firma',`idSupervisor2`='$idSupervisor2',`idOrdenador`='$idOrdenador' WHERE id = $idContrato";
 }else{
     $query = "UPDATE `contrato` SET `registro_pptal`='$registro_pptal',`rubro`='$rubro',`disp_presupuestal`='$disp_presupuestal',`years`='$years',`num_contrato`='$num_contrato',`fecha_delegacion`='$fecha_delegacion',`num_delegacion`='$num_delegacion',`area`='$area',
                                 `fecha_ini`='$fechaInicio',`fecha_fin`='$fechaFin',`valor_contrato`='$presupuesto',`valorDia`='$valorDia',`valorMes`='$valorMes',`duracion`='$dias',`objeto`='$objeto',`forma_pago`='$forma_pago',`entregables`='$entregables', 
                                 `salud`='$salud',`pension`='$pension',`arl`='$arl',`fecha_activacion`='$fecha_activacion',`observaciones`='$observaciones',`num_actas`='$totalActas',`idUsuario`='$idUsuario',`idSupervisor`='$idSupervisor',`modalidad`='$modalidad',
-                                `fecha_necesidad`='$fecha_necesidad',`fecha_firma`='$fecha_firma',`idSupervisor2`='$idSupervisor2'  WHERE id = $idContrato";
+                                `fecha_necesidad`='$fecha_necesidad',`fecha_firma`='$fecha_firma',`idSupervisor2`='$idSupervisor2',`idOrdenador`='$idOrdenador'  WHERE id = $idContrato";
 }
 $result = mysqli_query($conexion,$query) or die ("No se puede establecer conexion con la DBs.");
 //$result = false;

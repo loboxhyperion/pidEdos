@@ -48,9 +48,10 @@ include 'public/css/styles.css';
 <div class="container">
     <hr>
     <?php 
+        // echo $_SESSION['config'][0]["nombre"]; 
         // foreach($_SESSION['config'] as $config){
         //     echo "<br>".$config["nombre"];
-        //     echo "<br>".$config["tipo"];
+        //     echo "<br>".$config["valor"];
         // }
      ?>
     <h1 class="text-center">Bienvenido al Sistema :

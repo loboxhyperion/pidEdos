@@ -96,6 +96,7 @@ $_SESSION['rutaHome'] = "../../home.php";
 $_SESSION['rutaUsuario'] = "../Usuario/listar.php";
 $_SESSION['rutaCategoria'] = "../CategoriaProfesional/listar.php";
 $_SESSION['rutaRetencion'] = "../Retencion/listar.php";
+$_SESSION['rutaConfiguracion'] = "../Configuracion/listar.php";
 $_SESSION['rutaActasPendientes'] = "Acta/actasPendientes.php";
 $_SESSION['rutaAlcancesGlobales'] = "alcancesGlobales.php";
 $_SESSION['rutaInformeSupervisor'] = "../InformeSupervisor/listar.php";
@@ -190,14 +191,16 @@ include('../partials/menu.php');
         </a>
 
         <div class="member-details">
-            <strong><h4>Contrato:</strong> #<?php echo $filas['num_contrato']?></h4>
+            <strong>
+                <h4>Contrato:
+            </strong> #<?php echo $filas['num_contrato']?></h4>
             <div class="row info-list">
                 <div class="col-sm-3">
                     <strong>Contratista:</strong>
                     <p><?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?></p>
                 </div>
                 <div class="col-sm-3">
-                    <strong>Supervisor:</strong> 
+                    <strong>Supervisor:</strong>
                     <p><?php echo $singleRow2['nombre']," ",$singleRow2['apellidos']?></p>
                 </div>
                 <div class="col-sm-3">
@@ -228,19 +231,27 @@ include('../partials/menu.php');
 
                 <div class="col-sm-3">
                     <strong>Proyección Contractual:</strong>
-                    <p><a class="btn btn-success btn-sm" href="Proyeccion/listar.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>"><i class="far fa-eye"></i></a></p>
+                    <p><a class="btn btn-success btn-sm"
+                            href="Proyeccion/listar.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>"><i
+                                class="far fa-eye"></i></a></p>
                 </div>
                 <div class="col-sm-3">
                     <strong>Estampillas:</strong>
-                    <p><a class="btn btn-success btn-sm" href="Estampilla/listar.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>"><i class="far fa-eye"></i></a></p>
+                    <p><a class="btn btn-success btn-sm"
+                            href="Estampilla/listar.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>"><i
+                                class="far fa-eye"></i></a></p>
                 </div>
                 <div class="col-sm-3">
                     <strong>Alcances:</strong>
-                    <p><a class="btn btn-success btn-sm" href="Alcance/listar.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>"><i class="far fa-eye"></i></a></p>
+                    <p><a class="btn btn-success btn-sm"
+                            href="Alcance/listar.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>"><i
+                                class="far fa-eye"></i></a></p>
                 </div>
                 <div class="col-sm-3">
                     <strong>Acta de Inicio:</strong>
-                    <p><a class="btn btn-danger btn-sm" target="_blank" href="generarPdf.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre'], " ", $singleRow['apellidos'] ?>&NombreSupervisor=<?php echo $singleRow2['nombre'], " ", $singleRow2['apellidos'] ?>&fechaActa=<?php echo $filas['fecha_ini'] ?>"><i class="fa-regular fa-file-pdf"></i></a></p>
+                    <p><a class="btn btn-danger btn-sm" target="_blank"
+                            href="generarPdf.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre'], " ", $singleRow['apellidos'] ?>&NombreSupervisor=<?php echo $singleRow2['nombre'], " ", $singleRow2['apellidos'] ?>&fechaActa=<?php echo $filas['fecha_ini'] ?>"><i
+                                class="fa-regular fa-file-pdf"></i></a></p>
                 </div>
 
                 <div class="col-sm-3">
@@ -251,8 +262,10 @@ include('../partials/menu.php');
                     $Estampillas = mysqli_fetch_array($result3); 
                     if($Estampillas['impuesto'] > 4){
                     ?>
-                    <strong>Crear Actas:</strong> 
-                    <p><a class="btn btn-primary btn-sm" href="Acta/listarActas.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>&NombreSupervisor=<?php echo $singleRow2['nombre']," ",$singleRow2['apellidos'] ?>"><i class="far fa-plus-square"></i></a></p>
+                    <strong>Crear Actas:</strong>
+                    <p><a class="btn btn-primary btn-sm"
+                            href="Acta/listarActas.php?id=<?php echo $filas['id'] ?>&nombre=<?php echo $singleRow['nombre']," ",$singleRow['apellidos'] ?>&NombreSupervisor=<?php echo $singleRow2['nombre']," ",$singleRow2['apellidos'] ?>"><i
+                                class="far fa-plus-square"></i></a></p>
                     <?php
                     }else{
                     ?>
@@ -268,11 +281,13 @@ include('../partials/menu.php');
                     if($_SESSION['rol'] == 1 or $_SESSION['rol'] == 2  ){
                     ?>
                     <strong>Modificaciones Contractuales:</strong>
-                    <p><a class="btn btn-primary btn-sm" href="AdiccionSuspension/listar.php?id=<?php echo $filas['id'] ?>&fecha_ini=<?php echo $filas['fecha_ini']?>&valorDia=<?php echo $filas['valorDia']?>"><i class="far fa-plus-square"></i></a></p>
+                    <p><a class="btn btn-primary btn-sm"
+                            href="AdiccionSuspension/listar.php?id=<?php echo $filas['id'] ?>&fecha_ini=<?php echo $filas['fecha_ini']?>&valorDia=<?php echo $filas['valorDia']?>"><i
+                                class="far fa-plus-square"></i></a></p>
                     <?php
                     }
                     ?>
-                   
+
                 </div>
                 <div class="col-sm-6">
                     <?php
@@ -283,33 +298,41 @@ include('../partials/menu.php');
                     if($_SESSION['rol'] == 1 or $_SESSION['rol'] == 2  ){
                         if(!$Actas){
                     ?>
-                        <strong>Acciones:</strong>
-                        <div>
-                            <a class="btn btn-warning btn-sm" href="editar.php?id=<?php echo $filas['id'] ?>&modificar=No"><i class="far fa-edit" style="color:#fff;"></i></a>
-                            <a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $filas['id'] ?>"><i class="fas fa-trash-alt" style="color:#fff;"></i></a>
-                        </div>
-                        <?php
+                    <strong>Acciones:</strong>
+                    <div>
+                        <a class="btn btn-warning btn-sm"
+                            href="editar.php?id=<?php echo $filas['id'] ?>&modificar=No"><i class="far fa-edit"
+                                style="color:#fff;"></i></a>
+                        <a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $filas['id'] ?>"><i
+                                class="fas fa-trash-alt" style="color:#fff;"></i></a>
+                    </div>
+                    <?php
                         }else if ($Actas && $_SESSION['rol'] ==1 or $_SESSION['rol'] == 2 ){
                         ?>
-                            <strong>Acciones:</strong>
-                            <div>
-                                <a class="btn btn-warning btn-sm" href="editar.php?id=<?php echo $filas['id'] ?>&modificar=Si"><i class="far fa-edit" style="color:#fff;"></i></a>
-                                <a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $filas['id'] ?>"><i class="fas fa-trash-alt" style="color:#fff;"></i></a>
-                            </div>
-                        <?php
+                    <strong>Acciones:</strong>
+                    <div>
+                        <a class="btn btn-warning btn-sm"
+                            href="editar.php?id=<?php echo $filas['id'] ?>&modificar=Si"><i class="far fa-edit"
+                                style="color:#fff;"></i></a>
+                        <a class="btn btn-danger btn-sm" href="eliminar.php?id=<?php echo $filas['id'] ?>"><i
+                                class="fas fa-trash-alt" style="color:#fff;"></i></a>
+                    </div>
+                    <?php
                         }else{
                         ?>
-                            <strong>Acciones:</strong>
-                            <div>
-                                <a class="btn btn-warning btn-sm" href="" disabled><i class="far fa-edit" style="color:#fff;"></i></a>
-                                <a class="btn btn-danger btn-sm" href="" disabled><i class="fas fa-trash-alt" style="color:#fff;"></i></a>
-                            </div>
-                        <?php
+                    <strong>Acciones:</strong>
+                    <div>
+                        <a class="btn btn-warning btn-sm" href="" disabled><i class="far fa-edit"
+                                style="color:#fff;"></i></a>
+                        <a class="btn btn-danger btn-sm" href="" disabled><i class="fas fa-trash-alt"
+                                style="color:#fff;"></i></a>
+                    </div>
+                    <?php
                         }
                         }
                         ?>
                 </div>
-                
+
             </div>
         </div>
     </div>

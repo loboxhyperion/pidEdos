@@ -12,6 +12,24 @@ if(isset($_POST['usuario']) && isset($_POST['contraseña'])){
     $resultado = mysqli_query($conexion,$consulta);
     $filas = mysqli_fetch_array($resultado);
 
+    // se cargan las configuraciones 
+    $consulta= "SELECT * FROM configuracion WHERE activo = 1";
+    $configuraciones= mysqli_query($conexion,$consulta);
+
+    $configuracionesPortables = [];
+
+    
+    foreach($configuraciones as $config){
+        $configuracionesPortables [] = [
+            'nombre' => $config["nombre_configuracion"],
+            'valor' => $config["valor"]
+        ];
+        $_SESSION['config'] = $config;
+        // $_SESSION['configValor']  = $config['valor'];
+    }
+    
+    $_SESSION['config'] = $configuracionesPortables;
+    
     if($filas){
         $_SESSION['usuario']= $filas;
         $_SESSION['rol'] = $filas['idRol'];
@@ -21,11 +39,11 @@ if(isset($_POST['usuario']) && isset($_POST['contraseña'])){
         header("location:home.php");
     }else{
         ?>
-        <?php
+<?php
         include("index.php");
         ?>
-        <h1 class="bad">ERROR EN LA AUTENTIFICACION</h1>
-        <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION</h1>
+<?php
     }
 }
 

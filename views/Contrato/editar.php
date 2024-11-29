@@ -48,10 +48,12 @@ $row = mysqli_fetch_array($result);
                     while ($filas = mysqli_fetch_array($resultado)) {
                         if ($row['idUsuario'] == $filas['id']) {
                     ?>
-                            <option value="<?php echo $filas['id'] ?>" selected><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
-                        <?php   } else {
+                    <option value="<?php echo $filas['id'] ?>" selected>
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <?php   } else {
                         ?>
-                            <option value="<?php echo $filas['id'] ?>"><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
                     <?php
                         }
                     }
@@ -71,10 +73,12 @@ $row = mysqli_fetch_array($result);
                     while ($filas = mysqli_fetch_array($resultado)) {
                         if ($row['idSupervisor'] == $filas['id']) {
                     ?>
-                            <option value="<?php echo $filas['id'] ?>" selected><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
-                        <?php   } else {
+                    <option value="<?php echo $filas['id'] ?>" selected>
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <?php   } else {
                         ?>
-                            <option value="<?php echo $filas['id'] ?>"><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
                     <?php
                         }
                     }
@@ -83,7 +87,33 @@ $row = mysqli_fetch_array($result);
             </div>
             <br>
             <div class="form-group col-md-4">
-                <label for="idSupervisor" class="form-label">Segundo Supervisor<strong>(dejar vacio si no aplica)</strong></label>
+                <label for="idOrdenador" class="form-label">Ordenador del Gasto</label>
+                <select class="form-select" aria-label="Default select example" name="idOrdenador" required>
+                    <option value="">Seleccionar</option>
+                    <?php
+                    include('../../db.php');
+                    $consulta = "SELECT * FROM usuario WHERE idRol = 3";
+                    $resultado = mysqli_query($conexion, $consulta);
+
+                    while ($filas = mysqli_fetch_array($resultado)) {
+                        if ($row['idOrdenador'] == $filas['id']) {
+                    ?>
+                    <option value="<?php echo $filas['id'] ?>" selected>
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <?php   } else {
+                        ?>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <br>
+            <div class="form-group col-md-3">
+                <label for="idSupervisor" class="form-label">Segundo Supervisor<strong>(dejar vacio si no
+                        aplica)</strong></label>
                 <select class="form-select" aria-label="Default select example" name="idSupervisor2">
                     <option value="0">Seleccionar</option>
                     <?php
@@ -94,10 +124,12 @@ $row = mysqli_fetch_array($result);
                     while ($filas = mysqli_fetch_array($resultado)) {
                         if ($row['idSupervisor2'] == $filas['id']) {
                     ?>
-                            <option value="<?php echo $filas['id'] ?>" selected><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
-                        <?php   } else {
+                    <option value="<?php echo $filas['id'] ?>" selected>
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <?php   } else {
                         ?>
-                            <option value="<?php echo $filas['id'] ?>"><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
                     <?php
                         }
                     }
@@ -105,24 +137,29 @@ $row = mysqli_fetch_array($result);
                 </select>
             </div>
             <br>
-            <div class="form-group col-md-2">
-                <label for="registro_pptañ" class="form-label">Registro PPTAL</label>
-                <input type="text" class="form-control" placeholder="Ingrese el registro PPTAL" aria-label="Default select example" name="registro_pptal" value="<?php echo $row['registro_pptal'] ?>" required>
-            </div>
-            <br>
             <div class="form-group col-md-5">
                 <label for="rubro" class="form-label">Rubro</label>
-                <textarea class="form-control" aria-label="With textarea" name="rubro" required><?php echo $row['rubro'] ?></textarea>
-            </div>
-            <br>
-            <div class="form-group col-md-5">
-                <label for="modalidad" class="form-label">Modalidad Contractual</label>
-                <textarea class="form-control" aria-label="With textarea" name="modalidad" required><?php echo $row['modalidad'] ?></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="rubro"
+                    required><?php echo $row['rubro'] ?></textarea>
             </div>
             <br>
             <div class="form-group col-md-4">
+                <label for="modalidad" class="form-label">Modalidad Contractual</label>
+                <textarea class="form-control" aria-label="With textarea" name="modalidad"
+                    required><?php echo $row['modalidad'] ?></textarea>
+            </div>
+            <br>
+            <div class="form-group col-md-2">
+                <label for="registro_pptañ" class="form-label">Registro PPTAL</label>
+                <input type="text" class="form-control" placeholder="Ingrese el registro PPTAL"
+                    aria-label="Default select example" name="registro_pptal"
+                    value="<?php echo $row['registro_pptal'] ?>" required>
+            </div>
+            <br>
+            <div class="form-group col-md-2">
                 <label for="disp_presupuestal" class="form-label">Disponibilidad Presupuestal</label>
-                <input type="text" class="form-control" placeholder="" aria-label="Default select example" name="disp_presupuestal" value="<?php echo $row['disp_presupuestal'] ?>" required>
+                <input type="text" class="form-control" placeholder="" aria-label="Default select example"
+                    name="disp_presupuestal" value="<?php echo $row['disp_presupuestal'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-4">
@@ -143,17 +180,22 @@ $row = mysqli_fetch_array($result);
             <br>
             <div class="form-group col-md-4">
                 <label for="num_contrato" class="form-label">Número de contrato</label>
-                <input type="number" class="form-control" placeholder="Número de contrato" aria-label="Default select example" name="num_contrato" value="<?php echo $row['num_contrato'] ?>" required>
+                <input type="number" class="form-control" placeholder="Número de contrato"
+                    aria-label="Default select example" name="num_contrato" value="<?php echo $row['num_contrato'] ?>"
+                    required>
             </div>
             <br>
             <div class="form-group col-md-4">
                 <label for="fecha_delegacion" class="form-label">Fecha de delegación</label>
-                <input class="form-control" type="date" name="fecha_delegacion" value="<?php echo $row['fecha_delegacion'] ?>" required>
+                <input class="form-control" type="date" name="fecha_delegacion"
+                    value="<?php echo $row['fecha_delegacion'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-4">
                 <label for="num_delegacion" class="form-label">Número de delegación</label>
-                <input type="number" class="form-control" placeholder="Ingrese el número de delegación" aria-label="Default select example" name="num_delegacion" value="<?php echo $row['num_delegacion'] ?>" required>
+                <input type="number" class="form-control" placeholder="Ingrese el número de delegación"
+                    aria-label="Default select example" name="num_delegacion"
+                    value="<?php echo $row['num_delegacion'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-4">
@@ -162,23 +204,27 @@ $row = mysqli_fetch_array($result);
                     <option value="">Seleccionar</option>
                     <option value="<?php echo $row['area'] ?>" selected><?php echo $row['area'] ?></option>
                     <option value="Subdirección técnica">Subgerencia técnica</option>
-                    <option value="Subdirección Administrativa y Financiera">Subgerencia Administrativa y Financiera</option>
+                    <option value="Subdirección Administrativa y Financiera">Subgerencia Administrativa y Financiera
+                    </option>
                 </select>
             </div>
             <br>
             <div class="form-group col-md-2">
                 <label for="fecha_ini" class="form-label">Fecha de Inicio</label>
-                <input class="form-control" type="date" name="fecha_ini" value="<?php echo $row['fecha_ini'] ?>" required>
+                <input class="form-control" type="date" name="fecha_ini" value="<?php echo $row['fecha_ini'] ?>"
+                    required>
             </div>
             <br>
             <div class="form-group col-md-2">
                 <label for="fecha_fin" class="form-label">Fecha de Finalización</label>
-                <input class="form-control" type="date" name="fecha_fin" value="<?php echo $row['fecha_fin'] ?>" required>
+                <input class="form-control" type="date" name="fecha_fin" value="<?php echo $row['fecha_fin'] ?>"
+                    required>
             </div>
             <br>
             <div class="form-group col-md-4">
                 <label for="idSupervisor" class="form-label">Valor Mensual</label>
-                <select class="form-select valorMes" aria-label="Default select example" name="idCategoria" onchange="actualizarValor(this)" required>
+                <select class="form-select valorMes" aria-label="Default select example" name="idCategoria"
+                    onchange="actualizarValor(this)" required>
                     <option value="">Seleccionar</option>
                     <?php
                     include('../../db.php');
@@ -189,11 +235,13 @@ $row = mysqli_fetch_array($result);
                     while ($filas = mysqli_fetch_array($resultado)) {
                         if ($row['valorMes'] == $filas['valor']) {
                     ?>
-                            <option value="<?php echo $filas['id'] ?>" selected><?php echo number_format($filas['valor'], 0, ".", ",") ?></option>
-                        <?php
+                    <option value="<?php echo $filas['id'] ?>" selected>
+                        <?php echo number_format($filas['valor'], 0, ".", ",") ?></option>
+                    <?php
                         } else {
                         ?>
-                            <option value="<?php echo $filas['id'] ?>"><?php echo number_format($filas['valor'], 0, ".", ",") ?></option>
+                    <option value="<?php echo $filas['id'] ?>"><?php echo number_format($filas['valor'], 0, ".", ",") ?>
+                    </option>
                     <?php
                         }
                     }
@@ -203,60 +251,72 @@ $row = mysqli_fetch_array($result);
             </div>
             <div class="form-group col-md-2">
                 <label for="fecha_necesidad" class="form-label">Fecha Necesidad del servicio</label>
-                <input class="form-control" type="date" name="fecha_necesidad" value="<?php echo $row['fecha_necesidad'] ?>" required>
+                <input class="form-control" type="date" name="fecha_necesidad"
+                    value="<?php echo $row['fecha_necesidad'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-2">
                 <label for="fecha_firma" class="form-label">Fecha De La Firma de Contrato</label>
-                <input class="form-control" type="date" name="fecha_firma" value="<?php echo $row['fecha_firma'] ?>" required>
+                <input class="form-control" type="date" name="fecha_firma" value="<?php echo $row['fecha_firma'] ?>"
+                    required>
             </div>
             <!--VALOR PARA  GUARDAR Y ENVIAR EL SUELDO DE LA PERSONA-->
-            <input type="hidden" class="form-control currency" aria-label="Default select example" name="valorMes" value="<?php echo $row['valorMes'] ?>">
+            <input type="hidden" class="form-control currency" aria-label="Default select example" name="valorMes"
+                value="<?php echo $row['valorMes'] ?>">
             <div class="form-group col-md-12">
                 <label for="objeto" class="form-label">Objeto</label>
-                <textarea class="form-control" aria-label="With textarea" name="objeto" rows="4" required><?php echo $row['objeto'] ?></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="objeto" rows="4"
+                    required><?php echo $row['objeto'] ?></textarea>
             </div>
             <br>
             <div class="form-group col-md-12">
                 <label for="forma_pago" class="form-label">Forma de pago</label>
-                <textarea class="form-control" aria-label="With textarea" name="forma_pago" rows="10" required><?php echo $row['forma_pago'] ?></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="forma_pago" rows="10"
+                    required><?php echo $row['forma_pago'] ?></textarea>
             </div>
             <br>
             <div class="form-group col-md-12">
                 <label for="entregables" class="form-label">Entregables</label>
-                <textarea class="form-control" aria-label="With textarea" name="entregables" rows="4" required><?php echo $row['entregables'] ?></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="entregables" rows="4"
+                    required><?php echo $row['entregables'] ?></textarea>
             </div>
             <br>
             <div class="form-group col-md-3">
                 <label for="salud" class="form-label">Salud</label>
-                <input type="text" class="form-control" placeholder="Ingrese la salud a la que pertenece" aria-label="Default select example" name="salud" value="<?php echo $row['salud'] ?>" required>
+                <input type="text" class="form-control" placeholder="Ingrese la salud a la que pertenece"
+                    aria-label="Default select example" name="salud" value="<?php echo $row['salud'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-3">
                 <label for="pension" class="form-label">Pensión</label>
-                <input type="text" class="form-control" placeholder="Ingrese la pension a la que pertenece" aria-label="Default select example" name="pension" value="<?php echo $row['pension'] ?>" required>
+                <input type="text" class="form-control" placeholder="Ingrese la pension a la que pertenece"
+                    aria-label="Default select example" name="pension" value="<?php echo $row['pension'] ?>" required>
             </div>
             <br>
 
             <div class="form-group col-md-3">
                 <label for="arl" class="form-label">ARL</label>
-                <input type="text" class="form-control" placeholder="Ingrese la arl a la que pertenece" aria-label="Default select example" name="arl" value="<?php echo $row['arl'] ?>" required>
+                <input type="text" class="form-control" placeholder="Ingrese la arl a la que pertenece"
+                    aria-label="Default select example" name="arl" value="<?php echo $row['arl'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-3">
                 <label for="fecha_activacion" class="form-label">Fecha de Activación</label>
-                <input class="form-control" type="date" name="fecha_activacion" value="<?php echo $row['fecha_activacion'] ?>" required>
+                <input class="form-control" type="date" name="fecha_activacion"
+                    value="<?php echo $row['fecha_activacion'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-12">
                 <label for="observaciones" class="form-label">Observaciones</label>
-                <textarea class="form-control" aria-label="With textarea" name="observaciones" required><?php echo $row['observaciones'] ?></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="observaciones"
+                    required><?php echo $row['observaciones'] ?></textarea>
             </div>
             <br>
 
             <div class="form-group col-md-12">
                 <label for="riesgo" class="form-label">Riesgo</label>
-                <select class="form-select" aria-label="Default select example" name="idRetencion" onchange="actualizarNombreImpuesto(this)" required>
+                <select class="form-select" aria-label="Default select example" name="idRetencion"
+                    onchange="actualizarNombreImpuesto(this)" required>
                     <option value="">Seleccionar</option>
                     <?php
                     include('../../db.php');
@@ -265,7 +325,7 @@ $row = mysqli_fetch_array($result);
 
                     while ($filas2 = mysqli_fetch_array($resultado)) {
                     ?>
-                        <option value="<?php echo $filas2['id'] ?>"><?php echo $filas2['nombre'] ?></option>
+                    <option value="<?php echo $filas2['id'] ?>"><?php echo $filas2['nombre'] ?></option>
                     <?php
                     }
                     ?>
@@ -286,13 +346,13 @@ $row = mysqli_fetch_array($result);
 </div>
 <!-- Convierte en tiempo real cadena a FORMATO MONEDA -->
 <script type="text/javascript">
-    //cada que se seleciona algo en el select el valor del input con nombre de impuesto cambia
-    //permite así traer tambien el nombre del riesgo
-    function actualizarValor(option) {
-        //obtiene el texto del option en el select
-        var textoValor = option.options[option.selectedIndex].text;
-        textoValor = textoValor.replace(/,/g, "");
-        //document.contrato.nombreImpuesto.value = textoRiesgo;
-        $('.currency').val(textoValor);
-    }
+//cada que se seleciona algo en el select el valor del input con nombre de impuesto cambia
+//permite así traer tambien el nombre del riesgo
+function actualizarValor(option) {
+    //obtiene el texto del option en el select
+    var textoValor = option.options[option.selectedIndex].text;
+    textoValor = textoValor.replace(/,/g, "");
+    //document.contrato.nombreImpuesto.value = textoRiesgo;
+    $('.currency').val(textoValor);
+}
 </script>

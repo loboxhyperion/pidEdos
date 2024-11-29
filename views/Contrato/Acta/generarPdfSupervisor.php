@@ -54,7 +54,9 @@ $result7 = mysqli_query($conexion, $query7) or die("fallo en la conexión ");
 $arrayActa = array();
 $arrayIdActas = array(); // para usarse en donde se impacto las actas las x
 
-
+$query8 = "SELECT * FROM usuario  WHERE id = $row[idOrdenador]";
+$result8 = mysqli_query($conexion, $query8) or die("fallo en la conexión");
+$rowOrdenador = mysqli_fetch_array($result8);
 
 
 
@@ -265,9 +267,9 @@ $datos .= '
 <td width="38%"><strong>Cargo</strong></td>
 </tr>
 <tr>
-<td width="37%">' . 'LUIS ERNESTO VALENCIA RAMIREZ' . '</td>
-<td width="25%">' . '18510078' . '</td>
-<td width="38%">' . 'Gerente' . '</td>
+<td width="37%">' . $rowOrdenador['nombre']." ". $rowOrdenador['apellidos']. '</td>
+<td width="25%">' . $rowOrdenador['cedula'] . '</td>
+<td width="38%">' . $rowOrdenador['cargo'] . '</td>
 </tr>
 <tr>
 <td width="37%"><strong>Ordenador del Gasto De Agos 22- A Sept-10-2024</strong></td>

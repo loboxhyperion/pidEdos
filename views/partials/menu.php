@@ -52,6 +52,8 @@ $varsesion = $_SESSION['usuario'];
                 //Solo admin y creadores
                 if ($_SESSION['rol'] == 1 or $_SESSION['rol'] == 2) {
                 ?>
+                <li><a href="<?php echo $_SESSION['rutaConfiguracion'] ?>" title="Configuraciones"><i
+                            class="fas fa-solid fa-coins"></i>Configuraciones</a></li>
                 <li><a href="<?php echo $_SESSION['rutaRetencion'] ?>" title="Retenciones"><i
                             class="fas fa-solid fa-coins"></i>Retenciones</a></li>
                 <li><a href="<?php echo $_SESSION['rutaCategoria'] ?>" title="Sueldos"><i
@@ -89,7 +91,8 @@ $varsesion = $_SESSION['usuario'];
                 //Solo admin y creadores
                 if ($_SESSION['rol'] == 1 or $_SESSION['rol'] == 3) {
                 ?>
-                <li><a href="<?php echo $_SESSION['rutaContratosObra'] ?>" title="Obra"><i class="fas fa-solid fa-helmet-safety"></i>Obra</a></li>
+                <li><a href="<?php echo $_SESSION['rutaContratosObra'] ?>" title="Obra"><i
+                            class="fas fa-solid fa-helmet-safety"></i>Obra</a></li>
 
                 <?php
                 }
@@ -163,8 +166,8 @@ configMenuItem2.addEventListener('click', () => {
     const submenu = configMenuItem2.querySelector('.submenu ul');
     //// Encuentra el submenú asociado a la opción "Revision"
     const submenuOpciones = configMenuItem3.querySelector('.submenu ul');
-     //// Encuentra el submenú asociado a la opción "Contrato"
-     const submenuOpciones2 = configMenuItem4.querySelector('.submenu ul');
+    //// Encuentra el submenú asociado a la opción "Contrato"
+    const submenuOpciones2 = configMenuItem4.querySelector('.submenu ul');
 
     // Verifica si la clase está activa en el submenú "Revision"
     if (submenuOpciones.classList.contains("active")) {
@@ -192,8 +195,8 @@ configMenuItem3.addEventListener('click', () => {
     if (submenuOpciones.classList.contains("active")) {
         submenuOpciones.classList.toggle('active');
     }
-     // Verifica si la clase está activa en el submenú "Contrato"
-     if (submenuOpciones2.classList.contains("active")) {
+    // Verifica si la clase está activa en el submenú "Contrato"
+    if (submenuOpciones2.classList.contains("active")) {
         submenuOpciones2.classList.toggle('active');
     }
     // Alterna la clase "active" en el submenú para mostrarlo u ocultarlo

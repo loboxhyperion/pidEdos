@@ -47,6 +47,7 @@ $anticipo = 0;
 $fecha_necesidad = $_POST['fecha_necesidad'];
 $fecha_firma = $_POST['fecha_firma'];
 $idSupervisor2 = $_POST['idSupervisor2'];
+$idOrdenador = $_POST['idOrdenador'];
 
 // Usamos los metodos de calculos.php
 $dias = calcularDiasRango($fechaInicio, $fechaFin);
@@ -91,10 +92,10 @@ if ($ulti_digi_cedula >= 0 && $ulti_digi_cedula <= 99) {
 //almacenar el contrato
 $query = "INSERT INTO contrato (`registro_pptal`, `rubro`, `disp_presupuestal`, `years`, `num_contrato`, `contratante`, `fecha_delegacion`, `num_delegacion`, `area`, `fecha_ini`,
                                 `fecha_fin`, `valor_contrato`, `valorDia`, `valorMes`, `duracion`,`objeto`, `forma_pago`, `entregables`, `salud`, `pension`, `arl`, `dia_habil_pago`,
-                                `fecha_activacion`, `observaciones`, `num_actas`, `idUsuario`, `idSupervisor`, `modalidad`,`fecha_necesidad`,`fecha_firma`,`anticipo`,`idSupervisor2`) VALUES ('$registro_pptal','$rubro','$disp_presupuestal',
+                                `fecha_activacion`, `observaciones`, `num_actas`, `idUsuario`, `idSupervisor`, `modalidad`,`fecha_necesidad`,`fecha_firma`,`anticipo`,`idSupervisor2`,`idOrdenador`) VALUES ('$registro_pptal','$rubro','$disp_presupuestal',
                                 '$years','$num_contrato','$contratante','$fecha_delegacion','$num_delegacion','$area','$fechaInicio','$fechaFin','$presupuesto','$valorDia','$valorMes',
                                 '$dias','$objeto','$forma_pago','$entregables','$salud','$pension','$arl','$dia_habil_pago','$fecha_activacion','$observaciones','$totalActas','$idUsuario',
-                                '$idSupervisor','$modalidad','$fecha_necesidad','$fecha_firma','$anticipo','$idSupervisor2')";
+                                '$idSupervisor','$modalidad','$fecha_necesidad','$fecha_firma','$anticipo','$idSupervisor2','$idOrdenador')";
 
 $result = mysqli_query($conexion,$query); //or die ("No se puede establecer conexion con la DB.");
 // $result = false;

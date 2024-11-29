@@ -27,12 +27,14 @@ include('../partials/menusub.php');
         <form action="insertar.php" method="post">
             <div class="form-group col-md-8">
                 <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" placeholder="Nombre del impuesto" aria-label="nombre" name="nombre" required>
+                <input type="text" class="form-control" placeholder="Nombre del impuesto" aria-label="nombre"
+                    name="nombre" required>
             </div>
             <br>
             <div class="form-group col-md-8">
                 <label for="Porcentaje" class="form-label">%</label>
-                <input type="number" class="form-control" placeholder="Valor númerico" aria-label="Porcentaje" name="porcentaje" step="0.01" required>
+                <input type="number" class="form-control" placeholder="Valor númerico" aria-label="Porcentaje"
+                    name="porcentaje" step="0.01" required>
             </div>
             <br>
             <div class="form-group col-md-8">
@@ -53,6 +55,6 @@ include('../partials/menusub.php');
             <br>
             <br>
         </form>
-        
+
     </div>
 </div>

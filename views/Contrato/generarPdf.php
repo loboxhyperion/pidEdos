@@ -1,4 +1,8 @@
 <?php
+//seguridad de sessiones paginacion
+session_start();
+error_reporting(0);
+
 $idContrato = $_GET["id"];
 $NombreContratistas = $_GET["nombre"];
 $NombreSupervisor = $_GET["NombreSupervisor"];
@@ -22,6 +26,10 @@ $rowSupervisor2 = mysqli_fetch_array($result22);
 $query3 = "SELECT * FROM usuario  WHERE id = $row[idUsuario]";
 $result3 = mysqli_query($conexion, $query3) or die("fallo en la conexión");
 $rowContratista = mysqli_fetch_array($result3);
+
+$query4 = "SELECT * FROM usuario  WHERE id = $row[idOrdenador]";
+$result4 = mysqli_query($conexion, $query4) or die("fallo en la conexión");
+$rowOrdenador = mysqli_fetch_array($result4);
 
 require('fpdf.php');
 
@@ -138,11 +146,11 @@ $pdf->Cell(70, 5, mb_convert_encoding('Cargo', 'ISO-8859-1', 'UTF-8'), 1, 1, 'C'
 
 //Ordenador del Gasto
 $pdf->SetFont('Arial', 'B', 5);
-$pdf->Cell(65, 5, mb_convert_encoding('MANUEL ALBERTO RAMIREZ URIBE', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+$pdf->Cell(65, 5, mb_convert_encoding($rowOrdenador['nombre']." ". $rowOrdenador['apellidos'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
 //Identificacion  
-$pdf->Cell(57, 5, mb_convert_encoding('10.100.227', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+$pdf->Cell(57, 5, mb_convert_encoding($rowOrdenador['cedula'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
 //Cargo
-$pdf->Cell(70, 5, mb_convert_encoding('Gerente General', 'ISO-8859-1', 'UTF-8'), 1, 1, 'C', 0);
+$pdf->Cell(70, 5, mb_convert_encoding($rowOrdenador['cargo'], 'ISO-8859-1', 'UTF-8'), 1, 1, 'C', 0);
 
 
 //--//------------------------------------------------------------------//FILA6//------------------------------------------------------------

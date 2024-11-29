@@ -22,6 +22,7 @@ $_SESSION['rutaHome'] = "../../home.php";
 $_SESSION['rutaUsuario'] = "../Usuario/listar.php";
 $_SESSION['rutaCategoria'] = "../CategoriaProfesional/listar.php";
 $_SESSION['rutaRetencion'] = "listar.php";
+$_SESSION['rutaConfiguracion'] = "../Configuracion/listar.php";
 $_SESSION['rutaActasPendientes'] = "../Contrato/Acta/actasPendientes.php";
 $_SESSION['rutaAlcancesGlobales'] = "../Contrato/alcancesGlobales.php";
 $_SESSION['rutaInformeSupervisor'] = "../InformeSupervisor/listar.php";
@@ -46,25 +47,29 @@ include('../partials/menu.php');
                     <th>%</th>
                     <th>Tipo</th>
                     <th style="width:5%;">Acciones</th>
-                    
+
                 </tr>
-                    <?php
+                <?php
                         $cont = 1;
                         while($filas=mysqli_fetch_array($resultado)){
                     ?>
-                        <tr>
-                            <td><?php echo $cont ?></td>
-                            <td><?php echo $filas['nombre']?></td>
-                            <td><?php echo $filas['porcentaje']?></td>
-                            <td><?php echo $filas['tipo']?></td>
-                            <td>
-                                <div style="display:flex; justify-content:space-between">
-                                    <a class="btn btn-warning btn-sm" href="../Retencion/editar.php?id=<?php echo $filas['id'] ?>"><i class="far fa-edit" style="color:#fff;"></i></a>
-                                    <a class="btn btn-danger btn-sm" href="../Retencion/eliminar.php?id=<?php echo $filas['id'] ?>"><i class="fas fa-trash-alt" style="color:#fff;"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php     
+                <tr>
+                    <td><?php echo $cont ?></td>
+                    <td><?php echo $filas['nombre']?></td>
+                    <td><?php echo $filas['porcentaje']?></td>
+                    <td><?php echo $filas['tipo']?></td>
+                    <td>
+                        <div style="display:flex; justify-content:space-between">
+                            <a class="btn btn-warning btn-sm"
+                                href="../Retencion/editar.php?id=<?php echo $filas['id'] ?>"><i class="far fa-edit"
+                                    style="color:#fff;"></i></a>
+                            <a class="btn btn-danger btn-sm"
+                                href="../Retencion/eliminar.php?id=<?php echo $filas['id'] ?>"><i
+                                    class="fas fa-trash-alt" style="color:#fff;"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <?php     
                         }
                     ?>
             </table>

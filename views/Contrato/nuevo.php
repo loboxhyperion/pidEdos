@@ -27,9 +27,9 @@ include('../partials/menusub.php');
     <?php
     if (isset($_GET['mensaje'])) {
     ?>
-        <div class="p-3 mb-2 bg-danger text-white">
-            <?php echo $_GET['mensaje']; ?>
-        </div>
+    <div class="p-3 mb-2 bg-danger text-white">
+        <?php echo $_GET['mensaje']; ?>
+    </div>
     <?php } ?>
     <div class="col-md-12">
         <form class="row g-3" action="insertar.php" method="post">
@@ -45,7 +45,8 @@ include('../partials/menusub.php');
 
                     while ($filas = mysqli_fetch_array($resultado)) {
                     ?>
-                        <option value="<?php echo $filas['id'] ?>"><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
                     <?php
                     }
                     ?>
@@ -63,7 +64,8 @@ include('../partials/menusub.php');
 
                     while ($filas = mysqli_fetch_array($resultado)) {
                     ?>
-                        <option value="<?php echo $filas['id'] ?>"><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
                     <?php
                     }
                     ?>
@@ -71,7 +73,27 @@ include('../partials/menusub.php');
             </div>
             <br>
             <div class="form-group col-md-4">
-                <label for="idSupervisor" class="form-label">Segundo Supervisor<strong>(dejar vacio si no aplica)</strong></label>
+                <label for="idOrdenador" class="form-label">Ordenador del Gasto</label>
+                <select class="form-select" aria-label="Default select example" name="idOrdenador" required>
+                    <option value="">Seleccionar</option>
+                    <?php
+                    include('../../db.php');
+                    $consulta = "SELECT * FROM usuario WHERE idRol = 3 ORDER BY nombre ASC";
+                    $resultado = mysqli_query($conexion, $consulta);
+
+                    while ($filas = mysqli_fetch_array($resultado)) {
+                    ?>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
+            </div>
+            <br>
+            <div class="form-group col-md-3">
+                <label for="idSupervisor" class="form-label">Segundo Supervisor<strong>(dejar vacio si no
+                        aplica)</strong></label>
                 <select class="form-select" aria-label="Default select example" name="idSupervisor2">
                     <option value="0">Seleccionar</option>
                     <?php
@@ -81,31 +103,35 @@ include('../partials/menusub.php');
 
                     while ($filas = mysqli_fetch_array($resultado)) {
                     ?>
-                        <option value="<?php echo $filas['id'] ?>"><?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
+                    <option value="<?php echo $filas['id'] ?>">
+                        <?php echo $filas['nombre'] . ' ' . $filas['apellidos'] ?></option>
                     <?php
                     }
                     ?>
                 </select>
             </div>
             <br>
-            <div class="form-group col-md-2">
-                <label for="registro_pptañ" class="form-label">Registro PPTAL</label>
-                <input type="number" class="form-control" placeholder="Ingrese el registro PPTAL" aria-label="Default select example" name="registro_pptal" required>
-            </div>
-            <br>
+
             <div class="form-group col-md-5">
                 <label for="rubro" class="form-label">Rubro</label>
                 <textarea class="form-control" aria-label="With textarea" name="rubro" required></textarea>
             </div>
             <br>
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-4">
                 <label for="modalidad" class="form-label">Modalidad Contractual</label>
                 <textarea class="form-control" aria-label="With textarea" name="modalidad" required></textarea>
             </div>
             <br>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
+                <label for="registro_pptañ" class="form-label">Registro PPTAL</label>
+                <input type="number" class="form-control" placeholder="ej: 100" aria-label="Default select example"
+                    name="registro_pptal" required>
+            </div>
+            <br>
+            <div class="form-group col-md-2">
                 <label for="disp_presupuestal" class="form-label">Disponibilidad Presupuestal</label>
-                <input type="number" class="form-control" placeholder="" aria-label="Default select example" name="disp_presupuestal" required>
+                <input type="number" class="form-control" placeholder="ej: 111" aria-label="Default select example"
+                    name="disp_presupuestal" required>
             </div>
             <br>
             <div class="form-group col-md-4">
@@ -126,7 +152,8 @@ include('../partials/menusub.php');
             <br>
             <div class="form-group col-md-4">
                 <label for="num_contrato" class="form-label">Número de contrato</label>
-                <input type="number" class="form-control" placeholder="Número de contrato" aria-label="Default select example" name="num_contrato" required>
+                <input type="number" class="form-control" placeholder="Número de contrato"
+                    aria-label="Default select example" name="num_contrato" required>
             </div>
             <br>
             <div class="form-group col-md-4">
@@ -136,7 +163,8 @@ include('../partials/menusub.php');
             <br>
             <div class="form-group col-md-4">
                 <label for="num_delegacion" class="form-label">Número de delegación</label>
-                <input type="number" class="form-control" placeholder="Ingrese el número de delegación" aria-label="Default select example" name="num_delegacion" required>
+                <input type="number" class="form-control" placeholder="Ingrese el número de delegación"
+                    aria-label="Default select example" name="num_delegacion" required>
             </div>
             <br>
             <div class="form-group col-md-4">
@@ -144,7 +172,8 @@ include('../partials/menusub.php');
                 <select class="form-select" aria-label="Default select example" name="area" required>
                     <option value="">Seleccionar</option>
                     <option value="Subgerencia técnica">Subgerencia técnica</option>
-                    <option value="Subgerencia Administrativa y Financiera">Subgerencia Administrativa y Financiera</option>
+                    <option value="Subgerencia Administrativa y Financiera">Subgerencia Administrativa y Financiera
+                    </option>
                 </select>
             </div>
             <br>
@@ -159,7 +188,8 @@ include('../partials/menusub.php');
             </div>
             <div class="form-group col-md-4">
                 <label for="idSupervisor" class="form-label">Valor Mensual</label>
-                <select class="form-select valorMes" aria-label="Default select example" name="idCategoria" onchange="actualizarValor(this)" required>
+                <select class="form-select valorMes" aria-label="Default select example" name="idCategoria"
+                    onchange="actualizarValor(this)" required>
                     <option value="">Seleccionar</option>
                     <?php
                     include('../../db.php');
@@ -169,7 +199,8 @@ include('../partials/menusub.php');
 
                     while ($filas = mysqli_fetch_array($resultado)) {
                     ?>
-                        <option value="<?php echo $filas['id'] ?>"><?php echo number_format($filas['valor'], 0, ".", ",") ?></option>
+                    <option value="<?php echo $filas['id'] ?>"><?php echo number_format($filas['valor'], 0, ".", ",") ?>
+                    </option>
                     <?php
                     }
                     ?>
@@ -193,28 +224,33 @@ include('../partials/menusub.php');
             <br>
             <div class="form-group col-md-12">
                 <label for="forma_pago" class="form-label">Forma de pago</label>
-                <textarea class="form-control" aria-label="With textarea" name="forma_pago" rows="10" required></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="forma_pago" rows="10"
+                    required></textarea>
             </div>
             <br>
             <div class="form-group col-md-12">
                 <label for="entregables" class="form-label">Entregables</label>
-                <textarea class="form-control" aria-label="With textarea" name="entregables" rows="4" required></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="entregables" rows="4"
+                    required></textarea>
             </div>
             <br>
             <div class="form-group col-md-3">
                 <label for="salud" class="form-label">Salud</label>
-                <input type="text" class="form-control" placeholder="Ingrese la salud a la que pertenece" aria-label="Default select example" name="salud" required>
+                <input type="text" class="form-control" placeholder="Ingrese la salud a la que pertenece"
+                    aria-label="Default select example" name="salud" required>
             </div>
             <br>
             <div class="form-group col-md-3">
                 <label for="pension" class="form-label">Pensión</label>
-                <input type="text" class="form-control" placeholder="Ingrese la pension a la que pertenece" aria-label="Default select example" name="pension" required>
+                <input type="text" class="form-control" placeholder="Ingrese la pension a la que pertenece"
+                    aria-label="Default select example" name="pension" required>
             </div>
             <br>
 
             <div class="form-group col-md-3">
                 <label for="arl" class="form-label">ARL</label>
-                <input type="text" class="form-control" placeholder="Ingrese la arl a la que pertenece" aria-label="Default select example" name="arl" required>
+                <input type="text" class="form-control" placeholder="Ingrese la arl a la que pertenece"
+                    aria-label="Default select example" name="arl" required>
             </div>
             <br>
             <div class="form-group col-md-3">
@@ -234,7 +270,7 @@ include('../partials/menusub.php');
 
             while ($filas2 = mysqli_fetch_array($resultado)) {
             ?>
-                <input type="hidden" class="form-control" name="idRetencion[]" value="<?php echo $filas2['id'] ?>" />
+            <input type="hidden" class="form-control" name="idRetencion[]" value="<?php echo $filas2['id'] ?>" />
             <?php
             }
             ?>
@@ -249,7 +285,7 @@ include('../partials/menusub.php');
 
                     while ($filas2 = mysqli_fetch_array($resultado)) {
                     ?>
-                        <option value="<?php echo $filas2['id'] ?>"><?php echo $filas2['nombre'] ?></option>
+                    <option value="<?php echo $filas2['id'] ?>"><?php echo $filas2['nombre'] ?></option>
                     <?php
                     }
                     ?>
@@ -267,13 +303,13 @@ include('../partials/menusub.php');
     </div>
 </div>
 <script>
-    //cada que se seleciona algo en el select el valor del input con nombre de impuesto cambia
-    //permite así traer tambien el nombre del riesgo
-    function actualizarValor(option) {
-        //obtiene el texto del option en el select
-        var textoValor = option.options[option.selectedIndex].text;
-        textoValor = textoValor.replace(/,/g, "");
-        //document.contrato.nombreImpuesto.value = textoRiesgo;
-        $('.currency').val(textoValor);
-    }
+//cada que se seleciona algo en el select el valor del input con nombre de impuesto cambia
+//permite así traer tambien el nombre del riesgo
+function actualizarValor(option) {
+    //obtiene el texto del option en el select
+    var textoValor = option.options[option.selectedIndex].text;
+    textoValor = textoValor.replace(/,/g, "");
+    //document.contrato.nombreImpuesto.value = textoRiesgo;
+    $('.currency').val(textoValor);
+}
 </script>

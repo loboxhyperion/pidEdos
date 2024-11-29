@@ -53,7 +53,9 @@ $query7 = "SELECT * FROM acta  WHERE idContrato = $idContrato AND num_informe <=
 $result7 = mysqli_query($conexion, $query7) or die("fallo en la conexión ");
 $arrayActa = array();
 
-
+$query10 = "SELECT * FROM usuario  WHERE id = $row[idOrdenador]";
+$result10 = mysqli_query($conexion, $query10) or die("fallo en la conexión");
+$rowOrdenador = mysqli_fetch_array($result10);
 
 
 
@@ -269,9 +271,9 @@ $datos .= '
 <td width="38%"><strong>Cargo</strong></td>
 </tr>
 <tr>
-<td width="37%">' . 'LUIS ERNESTO VALENCIA RAMIREZ' . '</td>
-<td width="25%">' . '18510078' . '</td>
-<td width="38%">' . 'Gerente' . '</td>
+<td width="37%">' . $rowOrdenador['nombre']." ". $rowOrdenador['apellidos']. '</td>
+<td width="25%">' . $rowOrdenador['cedula'] . '</td>
+<td width="38%">' . $rowOrdenador['cargo'] . '</td>
 </tr>
 <tr>
 <td width="37%"><strong>Ordenador del Gasto Desde Agos 22- A Sept-10-2024</strong></td>
