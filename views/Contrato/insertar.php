@@ -74,6 +74,7 @@ foreach ($proyeccion as $acta) {
     echo "Acta {$acta['acta']}: desde {$acta['inicio']} hasta {$acta['fin']} dias: {$acta['dias']} valordia: {$acta['valorDia']} valorMes: {$acta['valorMes']} Acumulado: {$acta['acumulado']} Saldo: {$acta['saldo']}<br>";
 }
 
+// calcular dia habil de pago
 
 $consulta= "SELECT * FROM usuario WHERE id = '$idUsuario'";
 $resultado = mysqli_query($conexion,$consulta);

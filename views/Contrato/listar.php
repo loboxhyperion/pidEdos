@@ -282,7 +282,7 @@ include('../partials/menu.php');
                     ?>
                     <strong>Modificaciones Contractuales:</strong>
                     <p><a class="btn btn-primary btn-sm"
-                            href="AdiccionSuspension/listar.php?id=<?php echo $filas['id'] ?>&fecha_ini=<?php echo $filas['fecha_ini']?>&valorDia=<?php echo $filas['valorDia']?>"><i
+                            href="AdiccionSuspension/listar.php?id=<?php echo $filas['id'] ?>&fecha_ini=<?php echo $filas['fecha_ini']?>"><i
                                 class="far fa-plus-square"></i></a></p>
                     <?php
                     }

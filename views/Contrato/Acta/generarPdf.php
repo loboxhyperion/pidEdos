@@ -430,10 +430,12 @@ $sobrecargo .= '
     <tr>
         <th width="9%" align="center"><strong>N° Modificación</strong></th>
         <th width="8%" align="center"><strong>Tipo</strong></th>
-        <th width="12%" align="center"><strong>Fecha de modifiación</strong></th>
-        <th width="12%" align="center"><strong>Fecha de suspension</strong></th>
+        <th width="5%" align="center"><strong>CDP</strong></th>
+        <th width="5%" align="center"><strong>RP</strong></th>
+        <th width="10%" align="center"><strong>Fecha de modifiación</strong></th>
+        <th width="9%" align="center"><strong>Fecha de suspension</strong></th>
         <th width="9%" align="center"><strong>Fecha de reinicio</strong></th>
-        <th width="10%" align="center"><strong>Dias</strong></th>
+        <th width="5%" align="center"><strong>Dias</strong></th>
         <th width="10%" align="center"><strong>Valor</strong></th>
         <th width="15%" align="center"><strong>Fecha de terminación Anterior</strong></th>
         <th width="15%" align="center"><strong>Nueva fecha de terminación</strong></th>
@@ -444,7 +446,10 @@ while ($filas4 = mysqli_fetch_array($result4)) {
 
     $sobrecargo  .= '<tr>
                     <td align="center">' . $cont . '</td>
-                    <td align="center">' . $filas4['tipo'] . '</td>';
+                    <td align="center">' . $filas4['tipo'] . '</td>
+                    <td align="center">' . $filas4['cdp'] . '</td>
+                    <td align="center">' . $filas4['rp'] . '</td>';
+                    
     if ($filas4['tipo'] == "Suspension") {
         $sobrecargo .= '<td>' . $filas4['fecha_modificacion'] . '</td>
                                         <td>' . $filas4['fecha_suspension'] . '</td>
