@@ -46,6 +46,7 @@ include('../partials/menu.php');
                     <th>Nombre</th>
                     <th>%</th>
                     <th>Tipo</th>
+                    <th>Activo</th>
                     <th style="width:5%;">Acciones</th>
 
                 </tr>
@@ -58,6 +59,7 @@ include('../partials/menu.php');
                     <td><?php echo $filas['nombre']?></td>
                     <td><?php echo $filas['porcentaje']?></td>
                     <td><?php echo $filas['tipo']?></td>
+                    <td><?php echo $filas['activo'] == 1 ? 'SÍ' : 'NO'; ?></td>
                     <td>
                         <div style="display:flex; justify-content:space-between">
                             <a class="btn btn-warning btn-sm"

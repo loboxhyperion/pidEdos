@@ -263,20 +263,10 @@ include('../partials/menusub.php');
                 <textarea class="form-control" aria-label="With textarea" name="observaciones" required></textarea>
             </div>
             <br>
-            <?php
-            include('../../db.php');
-            $consulta = "SELECT * FROM retencion WHERE orden = 1 OR orden = 2 Order by orden Asc";
-            $resultado = mysqli_query($conexion, $consulta);
 
-            while ($filas2 = mysqli_fetch_array($resultado)) {
-            ?>
-            <input type="hidden" class="form-control" name="idRetencion[]" value="<?php echo $filas2['id'] ?>" />
-            <?php
-            }
-            ?>
             <div class="form-group col-md-12">
                 <label for="riesgo" class="form-label">Riesgo</label>
-                <select class="form-select" aria-label="Default select example" name="idRetencion[]" required>
+                <select class="form-select" aria-label="Default select example" name="idRiesgo" required>
                     <option value="">Seleccionar</option>
                     <?php
                     include('../../db.php');

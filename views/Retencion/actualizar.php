@@ -16,6 +16,7 @@ $id=$_POST['id'];
 $nombre=$_POST['nombre'];
 $porcentaje=$_POST['porcentaje'];
 $tipo=$_POST['tipo'];
+$activo = $_POST['activo'];
 
 switch($tipo){
     case "Base":
@@ -37,7 +38,7 @@ switch($tipo){
 include('../../db.php');
 
 //$query= "UPDATE usuario SET usuario=$usuario,clave=$contraseña,nombre=$nombre, apellidos=$apellidos, cedula=$cedula, last_num_cc=$last_num_cc, telefono=$telefono, correo=$correo, direccion=$direccion, profesion=$profesion,cargo=$cargo, tipo_persona=$tipo_persona,resp_iva=$resp_iva,idRol=$idRol WHERE id = $idUsuario";
-$query = "UPDATE `retencion` SET `nombre`='$nombre',`porcentaje`='$porcentaje',`tipo`='$tipo',`orden`='$orden' WHERE id = $id";
+$query = "UPDATE `retencion` SET `nombre`='$nombre',`porcentaje`='$porcentaje',`tipo`='$tipo',`orden`='$orden',`activo` = '$activo' WHERE id = $id";
 $result = mysqli_query($conexion,$query);
 
 
@@ -45,10 +46,10 @@ if($result){
     header("location:listar.php");
 }else{
     ?>
-    <?php
+<?php
     ?>
-    <h1 class="bad">ERROR EN LA AUTENTIFICACION</h1>
-    <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION</h1>
+<?php
 }
 //mysqli_free_result($resultado);
 mysqli_close($conexion);

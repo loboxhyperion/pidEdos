@@ -40,7 +40,7 @@ $fecha_activacion= $_POST['fecha_activacion'];
 $observaciones= $_POST['observaciones'];
 $idUsuario= $_POST['idUsuario'];
 $idSupervisor= $_POST['idSupervisor'];
-$idRiesgo= $_POST['idRiesgo'];
+$idRetenciones= $_POST['idRetencion'];
 $modalidad = $_POST['modalidad'];
 $anticipo = 0;
 
@@ -90,8 +90,6 @@ if ($ulti_digi_cedula >= 0 && $ulti_digi_cedula <= 99) {
 
 
 
-
-
 //almacenar el contrato
 $query = "INSERT INTO contrato (`registro_pptal`, `rubro`, `disp_presupuestal`, `years`, `num_contrato`, `contratante`, `fecha_delegacion`, `num_delegacion`, `area`, `fecha_ini`,
                                 `fecha_fin`, `valor_contrato`, `valorDia`, `valorMes`, `duracion`,`objeto`, `forma_pago`, `entregables`, `salud`, `pension`, `arl`, `dia_habil_pago`,
@@ -116,29 +114,18 @@ $result = mysqli_query($conexion,$query); //or die ("No se puede establecer cone
 if($result){
     /// obtiene el último id del registro insertado
     $idContrato = $conexion->insert_id;
-    
-     //Aquí se colocan todas
-     $consulta = "SELECT * FROM retencion WHERE orden = 1 OR orden = 2 Order by orden Asc";
-     $retenciones = mysqli_query($conexion, $consulta);
-     
      //insertamos las Retenciones
-     while ($retencion = mysqli_fetch_array($retenciones)) {
-
-        // TO-DO para cuando se evaluen las estampillas ya que algunas dependen de ciertos factores
-        
-        // para insertar solo el riesgo seleccionado
-        if($retencion['id'] == $idRiesgo){
-            $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$retencion[id]','Riesgo')";
-            echo "<br><strong>riego:</strong>$retencion[id]<br>";
+     for($i = 0; $i < count($idRetenciones); $i++){
+        //echo $idEstampillas[$i];
+        if($i == 3){
+            $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$idRetenciones[$i]','Riesgo')";
+            echo "<br><strong>riego:</strong>".$idRetenciones[$i]."<br>";
         }else{
-            $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$retencion[id]','Impuesto')";
-            echo "<br><strong>riego:</strong>$retencion[id]<br>";
+            $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$idRetenciones[$i]','Impuesto')";
+            echo "<br><strong>impuesto:</strong>".$idRetenciones[$i]."<br>";
         }
-        
         $result2 = mysqli_query($conexion,$query2) or die ("No se puede establecer conexion con la DB.");
-     }
-
-
+    }
     //---------------------------------------------------------------------------------------------------------------------------------------
     if($result2){
         

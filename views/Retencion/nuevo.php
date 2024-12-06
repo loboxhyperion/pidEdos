@@ -34,7 +34,7 @@ include('../partials/menusub.php');
             <div class="form-group col-md-8">
                 <label for="Porcentaje" class="form-label">%</label>
                 <input type="number" class="form-control" placeholder="Valor númerico" aria-label="Porcentaje"
-                    name="porcentaje" step="0.01" required>
+                    name="porcentaje" step="0.0001" required>
             </div>
             <br>
             <div class="form-group col-md-8">

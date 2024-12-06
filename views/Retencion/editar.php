@@ -33,33 +33,45 @@ $filas = mysqli_fetch_array($result);
         <form action="actualizar.php" method="post">
             <div class="form-group col-md-8">
                 <label for="Nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" placeholder="Nombre del impuesto" aria-label="nombre" name="nombre" value="<?php echo $filas['nombre'] ?>" required>
+                <input type="text" class="form-control" placeholder="Nombre del impuesto" aria-label="nombre"
+                    name="nombre" value="<?php echo $filas['nombre'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-8">
                 <label for="Porcentaje" class="form-label">%</label>
-                <input type="number" class="form-control" placeholder="Valor númerico" aria-label="Porcentaje" name="porcentaje" step="0.01" value="<?php echo $filas['porcentaje'] ?>" required>
+                <input type="number" class="form-control" placeholder="Valor númerico" aria-label="Porcentaje"
+                    name="porcentaje" step="0.01" value="<?php echo $filas['porcentaje'] ?>" required>
             </div>
             <br>
             <div class="form-group col-md-8">
                 <label for="tipo" class="form-label">Tipo</label>
                 <select class="form-select" aria-label="Default select example" name="tipo" required>
                     <option value="">Seleccionar</option>
-                    <option value="Base">Base</option>
-                    <option value="Estampilla">Estampilla</option>
-                    <option value="Impuesto">Impuesto</option>
-                    <option value="ARL">ARL</option>
+                    <option value="Base" <?= $filas['tipo'] == "Base" ? 'selected' : '' ?>>Base</option>
+                    <option value="Estampilla" <?= $filas['tipo'] == "Estampilla" ? 'selected' : '' ?>>Estampilla
+                    </option>
+                    <option value="Impuesto" <?= $filas['tipo'] == "Impuesto" ? 'selected' : '' ?>>Impuesto</option>
+                    <option value="ARL" <?= $filas['tipo'] == "ARL" ? 'selected' : '' ?>>ARL</option>
 
                 </select>
             </div>
             <br>
-            <input type="hidden" class="form-control"  name="id" step="0.01" value="<?php echo $id ?>" >
+            <div class="form-group col-md-3">
+                <label for="activo" class="form-label">Activo:</label>
+                <select class="form-select" id="activo" aria-label="Default select example" name="activo" required>
+                    <option value="">Seleccionar</option>
+                    <option value="1" <?= $filas['activo'] == 1 ? 'selected' : '' ?>>Sí</option>
+                    <option value="0" <?= $filas['activo'] == 0 ? 'selected' : '' ?>>No</option>
+                </select>
+            </div>
+            <br>
+            <input type="hidden" class="form-control" name="id" step="0.01" value="<?php echo $id ?>">
             <div class="form-group col-md-8" style="text-align:right;">
                 <input type="submit" class="btn btn-primary" value="Guardar" />
             </div>
             <br>
             <br>
         </form>
-        
+
     </div>
 </div>
