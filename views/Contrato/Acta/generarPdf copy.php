@@ -514,7 +514,7 @@ $pdf->writeHTMLCell(0, 0, '', '', $sobrecargo, 0, 1, 0, true, '', true);
 $impuestos = "";
 // Set some content to print
 $impuestos  .= '<h2 style="text-align:center">2.Seguridad Social E Impuestos</h2>
-<table border ="1" cellpadding="2">
+<table  border ="1" cellpadding="2">
     <tr>
         <th width="9%"><strong>Item</strong></th>
         <th width="4%"><strong>%</strong></th>
@@ -568,7 +568,7 @@ while ($idRetencion = mysqli_fetch_array($resultado2)) {
         $baseCotizacion = round(($itemRetencion['porcentaje'] / 100) * ($row['valorMes']));
         //$baseCotizacion = $baseCotizacion / $row['num_actas'];
         if ($baseCotizacion < $minimoMensual) {
-            $baseCotizacion = $minimoMensual; 
+            $baseCotizacion = $minimoMensual;
         }
         $impuestos  .= '<td>' . number_format($baseCotizacion, 2, ".", ",") . '</td>';
     } else {
@@ -592,11 +592,11 @@ while ($idRetencion = mysqli_fetch_array($resultado2)) {
         $sumActa  = $sumActa + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia) * $filas8['dias'];
     }
     if ($cont == 1) {
-        $impuestos .= '<td rowspan="4" align="center"><strong>' . $row['pension'] . '</strong></td>';
-        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><strong>' . $row['arl'] . '</strong></td>';
-        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><strong>' . $row['salud'] . '</strong></td>';
-        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><strong>' . $row['fecha_activacion'] . '</strong></td>';
-        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><h1>' . $row['dia_habil_pago'] . '</h1></td>';
+        $impuestos .= '<td rowspan="10" align="center" style="display:flex;align-items:center;justify-content:center;"><strong>' . $row['pension'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" align="center" style="display:flex;align-items:center;justify-content:center;"><strong>' . $row['arl'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" align="center" style="display:flex;align-items:center;justify-content:center;"><strong>' . $row['salud'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" align="center" style="display:flex;align-items:center;justify-content:center;"><strong>' . $row['fecha_activacion'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" align="center" style="display:flex;align-items:center;justify-content:center;"><h1>' . $row['dia_habil_pago'] . '</h1></td>';;
     }
     $impuestos .= '</tr>';
 

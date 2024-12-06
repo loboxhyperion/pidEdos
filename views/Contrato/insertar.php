@@ -100,7 +100,7 @@ $query = "INSERT INTO contrato (`registro_pptal`, `rubro`, `disp_presupuestal`, 
 
 $result = mysqli_query($conexion,$query); //or die ("No se puede establecer conexion con la DB.");
 // $result = false;
-
+// $result = true;
 //si todo fue correcto pasa
 //Para realizar los Alcances---------------------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------------------
@@ -117,10 +117,13 @@ if($result){
      //insertamos las Retenciones
      for($i = 0; $i < count($idRetenciones); $i++){
         //echo $idEstampillas[$i];
-        if($i == 3)
+        if($i == 3){
             $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$idRetenciones[$i]','Riesgo')";
-        else
+            echo "<br><strong>riego:</strong>".$idRetenciones[$i]."<br>";
+        }else{
             $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$idRetenciones[$i]','Impuesto')";
+            echo "<br><strong>impuesto:</strong>".$idRetenciones[$i]."<br>";
+        }
         $result2 = mysqli_query($conexion,$query2) or die ("No se puede establecer conexion con la DB.");
     }
     //---------------------------------------------------------------------------------------------------------------------------------------
