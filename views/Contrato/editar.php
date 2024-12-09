@@ -263,6 +263,17 @@ $row = mysqli_fetch_array($result);
             <!--VALOR PARA  GUARDAR Y ENVIAR EL SUELDO DE LA PERSONA-->
             <input type="hidden" class="form-control currency" aria-label="Default select example" name="valorMes"
                 value="<?php echo $row['valorMes'] ?>">
+
+            <div class="form-group col-md-12">
+                <label for="campo1" class="form-label">Campo 1</label>
+                <textarea class="form-control" aria-label="With textarea" name="campo1" rows="4"
+                    required><?php echo $row['campo1'] ?></textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="campo2" class="form-label">Campo2</label>
+                <textarea class="form-control" aria-label="With textarea" name="campo2" rows="4"
+                    required><?php echo $row['campo2'] ?></textarea>
+            </div>
             <div class="form-group col-md-12">
                 <label for="objeto" class="form-label">Objeto</label>
                 <textarea class="form-control" aria-label="With textarea" name="objeto" rows="4"

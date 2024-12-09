@@ -212,11 +212,20 @@ include('../partials/menusub.php');
             </div>
             <br>
             <div class="form-group col-md-2">
-                <label for="fecha_firma" class="form-label">Fecha De La Firma de Contrato</label>
+                <label for="fecha_firma" class="form-label">Fecha Firma de Contrato</label>
                 <input class="form-control" type="date" name="fecha_firma" required>
             </div>
             <!--VALOR PARA  GUARDAR Y ENVIAR EL SUELDO DE LA PERSONA-->
             <input type="hidden" class="form-control currency" aria-label="Default select example" name="valorMes">
+
+            <div class="form-group col-md-12">
+                <label for="campo1" class="form-label">Campo 1</label>
+                <textarea class="form-control" aria-label="With textarea" name="campo1" rows="4" required></textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="campo2" class="form-label">Campo2</label>
+                <textarea class="form-control" aria-label="With textarea" name="campo2" rows="4" required></textarea>
+            </div>
             <div class="form-group col-md-12">
                 <label for="objeto" class="form-label">Objeto</label>
                 <textarea class="form-control" aria-label="With textarea" name="objeto" rows="4" required></textarea>

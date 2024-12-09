@@ -494,6 +494,7 @@ if(isset($_GET['mensaje'])){
                     placeholder="Si no aplica este caso, deje el campo vacío." rows="5" cols="70"></textarea>
             </div>
         </div>
+
         <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
         <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
         <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
