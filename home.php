@@ -3,7 +3,10 @@
 session_start();
 error_reporting(0);
 include("views/middleware/acceso.php");
-
+// para ver si hay errores
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 $varsesion = $_SESSION['usuario'];
 
 //si no hay algun usuario registradose devuelve al login

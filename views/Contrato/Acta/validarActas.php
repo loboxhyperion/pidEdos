@@ -27,10 +27,10 @@ if($result){
     }     
 }else{
     ?>
-    <?php
+<?php
     ?>
-    <h1 class="bad">ERROR EN LA EN EL PROCESO</h1>
-    <?php
+<h1 class="bad">ERROR EN LA EN EL PROCESO</h1>
+<?php
 }
 //mysqli_free_result($resultado);
 ob_end_flush();

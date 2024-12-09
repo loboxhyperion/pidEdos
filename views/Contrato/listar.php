@@ -214,11 +214,11 @@ include('../partials/menu.php');
 
                 <div class="col-sm-3">
                     <strong>Fecha De Inicio: </strong>
-                    <p><?php echo $filas['fecha_ini'] ?></p>
+                    <p><?php echo date("d-m-Y",strtotime($filas['fecha_ini'])) ?></p>
                 </div>
                 <div class="col-sm-3">
                     <strong>Fecha De Finalización: </strong>
-                    <p><?php echo $filas['fecha_fin'] ?></p>
+                    <p><?php echo date("d-m-Y",strtotime($filas['fecha_fin']))?></p>
                 </div>
                 <div class="col-sm-3">
                     <strong>Valor Contrato:</strong>
@@ -228,7 +228,6 @@ include('../partials/menu.php');
                     <strong>Duración Días:</strong>
                     <p><?php echo $filas['duracion'] ?></p>
                 </div>
-
                 <div class="col-sm-3">
                     <strong>Proyección Contractual:</strong>
                     <p><a class="btn btn-success btn-sm"

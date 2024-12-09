@@ -42,7 +42,7 @@ $fecha_activacion= $_POST['fecha_activacion'];
 $observaciones= $_POST['observaciones'];
 $idUsuario= $_POST['idUsuario'];
 $idSupervisor= $_POST['idSupervisor'];
-$idRetencion= $_POST['idRetencion'];
+$idRiesgo= $_POST['idRiesgo'];
 $modalidad = $_POST['modalidad'];
 $idCategoria =$_POST['idCategoria'];
 
@@ -94,7 +94,7 @@ $result = mysqli_query($conexion,$query) or die ("No se puede establecer conexio
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 if($result && $modificar == "No"){
-    $query2 = "UPDATE `contrato_retencion` SET `idRetencion`='$idRetencion' WHERE idContrato = '$idContrato' and impuesto = 'Riesgo'";
+    $query2 = "UPDATE `contrato_retencion` SET `idRetencion`='$idRiesgo' WHERE idContrato = '$idContrato' and impuesto = 'Riesgo'";
     $result2 = mysqli_query($conexion,$query2) or die ("No se puede establecer conexion con la DB.");
 
     if($result2){

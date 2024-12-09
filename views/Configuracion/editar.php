@@ -57,7 +57,6 @@ $config = mysqli_fetch_array($result);
                 </select>
             </div>
             <br>
-
             <div class="form-group col-md-12" style="text-align:right;">
                 <input type="submit" class="btn btn-primary" value="Guardar" />
             </div>

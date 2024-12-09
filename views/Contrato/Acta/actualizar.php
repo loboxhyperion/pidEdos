@@ -17,6 +17,8 @@ $Ubicaciones = $_POST['ubicacion'];
 $observaciones = $_POST['observaciones'];
 $valorPlanillaReal = $_POST['valorPlanillaReal'];
 
+$mas_cotizacion = $_POST['mas_cotizacion'];
+
 /*echo "<br>". $fecha_informe;
 echo "<br>". $NombreContratistas;
 echo "<br>". $NombreSupervisor ;
@@ -33,7 +35,8 @@ for($i = 0; $i < count($idAlcances); $i++){
 */
 
 
-$query = "UPDATE `acta` SET `fecha_informe`='$fecha_informe',`numPlanilla`='$numPlanilla',`fechaPlanilla`='$fechaPlanilla',`valorPlanilla`='$valorPlanilla',`observaciones`='$observaciones',`valorPlanillaReal`= $valorPlanillaReal WHERE id = $idActa";
+$query = "UPDATE `acta` SET `fecha_informe`='$fecha_informe',`numPlanilla`='$numPlanilla',`fechaPlanilla`='$fechaPlanilla',`valorPlanilla`='$valorPlanilla',
+         `observaciones`='$observaciones',`valorPlanillaReal`= $valorPlanillaReal,`mas_cotizacion`= $mas_cotizacion WHERE id = $idActa";
 $result = mysqli_query($conexion,$query) or die ("No se puede establecer conexion con la DB en acta e.");
 
 
@@ -79,18 +82,18 @@ if($result){
         header("location:listarActas.php?id=".$idContrato ."&nombre=".$NombreContratistas."&NombreSupervisor=".$NombreSupervisor);     
     }else{
         ?>
-        <?php
+<?php
         ?>
-        <h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LAS ACTIVIDADES</h1>
-        <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LAS ACTIVIDADES</h1>
+<?php
     }
 
 }else{
     ?>
-    <?php
+<?php
     ?>
-    <h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LAS ACTAS</h1>
-    <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LAS ACTAS</h1>
+<?php
 }
 //mysqli_free_result($resultado);
 ob_end_flush();

@@ -3,7 +3,7 @@
 $db = "pidedos";
 $host = "localhost:3307";
 $pw = "";
-$user = "pid";
+$user = "root";
 // remota
 // $db = "edosgov2_pidDB";
 // $host = "localhost";

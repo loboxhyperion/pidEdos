@@ -315,18 +315,33 @@ $row = mysqli_fetch_array($result);
 
             <div class="form-group col-md-12">
                 <label for="riesgo" class="form-label">Riesgo</label>
-                <select class="form-select" aria-label="Default select example" name="idRetencion"
-                    onchange="actualizarNombreImpuesto(this)" required>
+                <select class="form-select" aria-label="Default select example" name="idRiesgo"
+                    onchange="actualizarNombreImpuestos(this)" required>
                     <option value="">Seleccionar</option>
                     <?php
                     include('../../db.php');
+                    $consulta2 = "SELECT c.id,cr.idContrato,cr.idRetencion,r.id,r.nombre,r.orden FROM contrato AS c 
+                                 INNER JOIN  contrato_retencion AS cr ON c.id = cr.idContrato 
+                                 INNER JOIN retencion AS r ON cr.idRetencion = r.id  
+                                 WHERE c.id = $row[id]  AND r.orden = 3";
+                                 
+                    $riesgo = mysqli_query($conexion, $consulta2);
+
                     $consulta = "SELECT * FROM retencion WHERE orden = 3";
+                    
                     $resultado = mysqli_query($conexion, $consulta);
 
                     while ($filas2 = mysqli_fetch_array($resultado)) {
+                        // if($filas2['nombre'] == $riesgo['nombre']){
+                        
+                    ?>
+                    <!-- <option value="<?php //echo $filas2['id'] ?>" selected><?php //echo $filas2['nombre'] ?></option> -->
+                    <?php
+                        // }else{
                     ?>
                     <option value="<?php echo $filas2['id'] ?>"><?php echo $filas2['nombre'] ?></option>
                     <?php
+                        // }
                     }
                     ?>
                 </select>

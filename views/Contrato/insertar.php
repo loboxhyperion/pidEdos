@@ -118,7 +118,7 @@ if($result){
     $idContrato = $conexion->insert_id;
     
      //Aquí se colocan todas
-     $consulta = "SELECT * FROM retencion WHERE orden = 1 OR orden = 2 Order by orden Asc";
+     $consulta = "SELECT * FROM retencion WHERE activo = 1 Order by orden Asc";
      $retenciones = mysqli_query($conexion, $consulta);
      
      //insertamos las Retenciones
@@ -129,13 +129,14 @@ if($result){
         // para insertar solo el riesgo seleccionado
         if($retencion['id'] == $idRiesgo){
             $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$retencion[id]','Riesgo')";
-            echo "<br><strong>riego:</strong>$retencion[id]<br>";
-        }else{
+            $result2 = mysqli_query($conexion,$query2) or die ("No se puede establecer conexion con la DB.");
+        }elseif($retencion['orden'] != 3){
             $query2 = "INSERT INTO contrato_retencion(`idContrato`, `idRetencion`,`impuesto`) VALUES ('$idContrato','$retencion[id]','Impuesto')";
-            echo "<br><strong>riego:</strong>$retencion[id]<br>";
+            $result2 = mysqli_query($conexion,$query2) or die ("No se puede establecer conexion con la DB.");
         }
+        echo "<br><strong>riego:</strong>$retencion[id]<br>";
         
-        $result2 = mysqli_query($conexion,$query2) or die ("No se puede establecer conexion con la DB.");
+        
      }
 
 

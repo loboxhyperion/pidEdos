@@ -14,7 +14,7 @@ if(!isset($_SESSION['rol'])){
      $minimoDia = $minimoMensual /30;
      include('../../../db.php');
 
-    //  echo "<br>". $arrayActa[$i];
+     echo "<br>". $arrayActa[$i];
 
      //extraccion información del contrato
      $query= "SELECT * FROM contrato  WHERE contrato.id = $idContrato";
@@ -98,7 +98,7 @@ if(isset($_GET['mensaje'])){
     <hr>
 </div>
 <br>
-<div class="container decorado" style="background: #e0e0e0;border-radius: 25px; padding:25px;">
+<div class="container decorado" style="background: #e0e0e0;border-radius: 25px;">
     <form class="row g-3" action="insertarActa.php" method="post">
         <br>
         <h1 class="text-center blanco">Proyeccion contractual : <?php echo $NombreContratistas ?></h1>
@@ -320,8 +320,6 @@ if(isset($_GET['mensaje'])){
                         <tr>
                             <th>N° Modificación</th>
                             <th>Tipo</th>
-                            <th>CDP</th>
-                            <th>RP</th>
                             <th>Fecha de modifiación</th>
                             <th>Fecha de suspension</th>
                             <th>Fecha de reinicio</th>
@@ -338,10 +336,8 @@ if(isset($_GET['mensaje'])){
                         <tr>
                             <td><?php echo $cont?></td>
                             <td><?php echo $filas4['tipo']?></td>
-                            <td><?php echo $filas4['cdp']?></td>
-                            <td><?php echo $filas4['rp']?></td>
-                            <td><?php echo $filas4['tipo'] == 'Adicion'? 'NA' :$filas4['fecha_modificacion']?></td>
-                            <td><?php echo $filas4['tipo'] == 'Adicion'? 'NA' :$filas4['fecha_suspension']?></td>
+                            <td><?php echo $filas4['fecha_modificacion']?></td>
+                            <td><?php echo $filas4['fecha_suspension']?></td>
                             <td><?php echo $filas4['fecha_reinicio']?></td>
                             <td><?php echo $filas4['dias']?></td>
                             <td><?php echo round($filas4['valor'])?></td>
@@ -368,241 +364,131 @@ if(isset($_GET['mensaje'])){
 
         </div>
         <hr>
-
         <h2 class="text-center blanco">2.Seguridad Social E Impuestos</h2>
         <hr>
-        <h3 class="text-center blanco">Seguridad Social</h3>
-        <?php
-            $query= "SELECT r.id,r.nombre,r.porcentaje,r.tipo,r.orden FROM contrato AS c 
-            INNER JOIN  contrato_retencion AS cr ON c.id = cr.idContrato 
-            INNER JOIN retencion AS r ON cr.idRetencion = r.id  
-            WHERE c.id = $idContrato AND (r.orden = 1 OR r.orden = 2 OR r.orden = 3) ORDER BY r.orden ASC";
-
-            $retenciones = mysqli_query($conexion,$query);
-        ?>
         <div class="row">
             <div class="col-md-12">
-                <table class="table" style="text-align:center;">
+                <table class="table">
                     <tr>
                         <th>Item</th>
                         <th>%</th>
-                        <th>Pagado por la entidad</th>
                         <th>Tipo</th>
+                        <th>Valor Total</th>
+                        <th>Valor Mes</th>
+                        <th>Valor Dia</th>
                         <th>Dias a Pagar</th>
                         <th>Correspondiente al Acta</th>
-                        <th>Salud</th>
-                        <th>Pensión</th>
-                        <th>ARL</th>
+                        <th>Entidad Afiliación</th>
                         <th>Fecha afiliación</th>
                         <th>Día Habil de pago</th>
                     </tr>
                     <?php
-                
+                                        $consulta2= "SELECT * FROM `contrato_retencion` WHERE idContrato = $idContrato";
+                                        $resultado2 = mysqli_query($conexion,$consulta2);
+                                        $rowsImpuestos = mysqli_num_rows($resultado2);
+                                   // $idRetencion =mysqli_fetch_array($resultado2);
+                                   
+                                        /*if($idRetencion =mysqli_fetch_array($resultado2)){
+                                             echo "verdad";
+                                        }else{
+                                             echo "falso";
+                                        }*/
 
-                        $count = 1;
-                        $pagoTotalActa = 0;
-                        $seguridadSocial = 0;
-                        while($retencion =mysqli_fetch_array($retenciones)){ 
-
-                            if($count == 1){
-                                // sacamos la base de cotización
-                                $baseCotizacion = round(($retencion['porcentaje']/100) * ($filas8['valor_dia'] * $filas8['dias']));
-                                $baseCotizacion =  $baseCotizacion > $minimoMensual ? $baseCotizacion : $minimoMensual;
-                            }else{
-                                $seguridadSocial = round(($retencion['porcentaje'] / 100) * $baseCotizacion);
-                            }
-
-                            // para el caso que sea riesgo 5
-                            $entidadPaga = $retencion['nombre'] == "Riesgo 5"
-                            ? $seguridadSocial  //si lo es
-                            : 0;
-                   
-                    ?>
+                                        $cont = 1;
+                                        $sumBaseTotal = 0;
+                                        $sumBaseMes = 0;
+                                        $sumBaseDia = 0;
+                                        $sumActa = 0;
+                                        while($idRetencion =mysqli_fetch_array($resultado2)){ 
+                                             $consulta3= "SELECT * FROM `retencion` WHERE id = $idRetencion[idRetencion] ";
+                                             $resultado3 = mysqli_query($conexion,$consulta3); 
+                                             $itemRetencion =mysqli_fetch_array($resultado3);                  
+                                   ?>
                     <tr>
-                        <td style="text-align:left;"><?php echo $retencion['nombre']; ?></td>
-                        <td><?php echo $retencion['porcentaje'];?>%</td>
-                        <td><?php echo number_format($entidadPaga,2); ?></td>
-                        <td><?php echo $retencion['tipo']; ?></td>
-                        <?php if ($count == 1): ?>
-                        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-                            <h1><?php echo $filas8['dias']; ?></h1>
-                        </td>
-                        <?php endif; ?>
-
+                        <td><?php echo $itemRetencion['nombre']; ?></td>
+                        <td><?php echo $itemRetencion['porcentaje'];?>%</td>
+                        <td><?php echo $itemRetencion['tipo']; ?></td>
                         <td>
-                            <?php  
-                            // correspondiente al acta
-                                if($count == 1){ 
-                                    echo number_format($baseCotizacion,2);
-                                }elseif($entidadPaga > 0){
-                                    echo number_format(0,2);
-                                }else{ 
-                                    echo number_format($seguridadSocial,2); 
-                                    $pagoTotalActa  = $pagoTotalActa + $seguridadSocial;
-                                } 
-                            ?>
+                            <?php 
+                                                  ///para sacar el valor total
+                                                       if($cont == 1){
+           
+                                                            $baseCotizacionTotal = round(($itemRetencion['porcentaje'] / 100) * ($row['valor_contrato']));
+                                                            if($baseCotizacionTotal < ($minimoDia * $row['duracion'])){
+                                                                 $baseCotizacionTotal = $minimoDia * $row['duracion'];
+          
+                                                            }
+                                                            echo $baseCotizacionTotal ;
+                                                       }else{
+                                                            echo round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionTotal);
+                                                            $sumBaseTotal = $sumBaseTotal + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionTotal);
+                                                            
+                                                       }
+                                                       
+                                                  ?>
                         </td>
-                        <?php  if($count == 1): ?>
-                        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-                            <h5><?php echo $row['salud'] ?></h5>
+                        <td><?php 
+                                                  ///para sacar el valor mes
+                                                       if($cont == 1){
+                                                            $baseCotizacion = round(($itemRetencion['porcentaje'] / 100) * ($row['valorMes']));
+                                                           //$baseCotizacion = $baseCotizacion / $row['num_actas'];
+                                                            if($baseCotizacion < $minimoMensual){
+                                                                 $baseCotizacion = $minimoMensual;
+                                                            }
+                                                            echo $baseCotizacion ;
+                                                       }else{
+                                                            echo round(($itemRetencion['porcentaje'] / 100) * $baseCotizacion );
+                                                            $sumBaseMes = $sumBaseMes + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacion) ;
+                                                       }
+                                                       
+                                                  ?>
                         </td>
-                        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-                            <h5><?php echo $row['pension'] ?></h5>
+                        <td><?php 
+                                             ///para sacar el valor dia
+                                                       if($cont == 1){
+                                                            $baseCotizacionDia = $baseCotizacion / 30 ;//round($baseCotizacion / 30);
+                                                            echo round($baseCotizacionDia) ;
+                                                       }else{
+                                                            echo round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia) ;
+                                                            $sumBaseDia = $sumBaseDia + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia) ;
+                                                       }
+                                                       
+                                                  ?>
                         </td>
-                        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-                            <h5><?php echo $row['arl'] ?></h5>
+
+                        <td style="vertical-align:middle;"><?php echo $filas8['dias']; ?></td>
+                        <!-- <td><?php  //if($cont == 1){ echo $baseCotizacion; }else{ echo ($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia * $filas8['dias']; $sumActa  = $sumActa + ($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia * $filas8['dias'];} ?></td>-->
+                        <td><?php  if($cont == 1){ echo $baseCotizacionDia * $filas8['dias'] ; }else{ echo round((($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia) * $filas8['dias']) ; $sumActa  = $sumActa + (($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia) * $filas8['dias'];} ?>
                         </td>
-                        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-                            <h5><?php echo date('d-m-Y', strtotime($row['fecha_activacion'])); ?></h5>
+                        <td><?php echo $row['salud'] ?></td>
+                        <td><?php echo $row['fecha_activacion'] ?></td>
+                        <td rowspan="8" style="vertical-align:middle;">
+                            <h1><?php  if($cont == 1){ echo $row['dia_habil_pago']; } ?></h1>
                         </td>
-                        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-                            <h3><?php echo $row['dia_habil_pago']; ?></h3>
-                        </td>
-                        <?php endif; ?>
 
                     </tr>
-                    <?php $count++; } ?>
-                    <!-- Fila para los totales -->
+                    <?php if($cont == 4 || $cont == $rowsImpuestos ){ $baseCotizacionTotal =  $row['valor_contrato'] ;  $baseCotizacion = $row['valorDia'] * 30;   $baseCotizacionDia = $row['valorDia'] ; ?>
                     <tr>
-                        <td style="text-align:left;"><strong>
-                                <h3>Total a pagar:</h3>
+                        <td colspan="3" style="text-align:center;"><strong>
+                                <h3>Total</h3>
                             </strong></td>
+                        <td><strong><?php echo $sumBaseTotal ?></strong></td>
+                        <td><strong><?php echo $sumBaseMes ?></strong></td>
+                        <td><strong><?php echo $sumBaseDia ?></strong></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <h4><?php echo number_format($pagoTotalActa,2) ?></strong></h4>
-                            <?php if($cont == 4){ ?>
-                            <input type="hidden" class="form-control" name="valorPlanillaReal"
-                                value="<?php echo $pagoTotalActa ?>" />
-                            <?php } ?>
-                        </td>
+                        <td><strong><?php echo $sumActa ?></strong></td>
+                        <?php if($cont == 4){ ?>
+                        <input type="hidden" class="form-control" name="valorPlanillaReal"
+                            value="<?php echo $sumActa ?>" />
+                        <?php } ?>
+
                     </tr>
+                    <?php $sumBaseTotal =0; $sumBaseMes =0; $sumBaseDia =0; $sumActa = 0;} ?>
+
+                    <?php $cont++; } ?>
                 </table>
             </div>
-            <div class="form-group col-md-12">
-                <label class="form-label">
-                    <h6>Nota Aclaratoria:</h6>
-                    <p>Si cotiza más en seguridad social, especifíquelo abajo. De lo contrario, deje el campo
-                        vacío.
-                        esto será indicado en el campo de Observaciones para mayor claridad.
-                        de mas:</p>
-
-                </label>
-                <textarea class="form-control" aria-label="With textarea" name="mas_cotizacion"
-                    placeholder="Si no aplica este caso, deje el campo vacío." rows="5" cols="70"></textarea>
-            </div>
         </div>
-        <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
-
-        <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI COMIENZA LA TABLA DE IMPUESTOS ......................................................-->
-        <?php
-            $query= "SELECT r.id,r.nombre,r.porcentaje,r.tipo,r.orden FROM contrato AS c 
-            INNER JOIN  contrato_retencion AS cr ON c.id = cr.idContrato 
-            INNER JOIN retencion AS r ON cr.idRetencion = r.id  
-            WHERE c.id = $idContrato AND r.orden = 4  ORDER BY r.orden ASC";
-
-            $impuestos = mysqli_query($conexion,$query);
-        ?>
-        <hr>
-        <h3 class="text-center blanco">Impuestos</h3>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table" style="text-align:center;">
-                    <tr>
-                        <th>Item</th>
-                        <th>%</th>
-                        <th>Tipo</th>
-                        <th>Dias a Pagar</th>
-                        <th>Correspondiente al Acta</th>
-                    </tr>
-                    <?php
-
-            
-
-                        $count = 1;
-                        $pagoTotalImpuestos = 0;
-                        while($impuesto =mysqli_fetch_array($impuestos)){ 
-
-                            
-
-                            //La condicional verdadera solo se hace en la primera acta
-                            $estampilla = $numInforme == 1 && $impuesto['nombre'] == "Hospital Universitario - Homeris" 
-                            ? round(($impuesto['porcentaje'] / 100) * ($row['valor_contrato']))// Se descuenta el impuesto de la estampilla hospital del valor total del contrato
-                            : round(($impuesto['porcentaje'] / 100) *  ($filas8['valor_dia'] * $filas8['dias']));// de no ser la primera acta sacamos el calculo de la estampilla normal segun los dias a pagar
-                            
-                    ?>
-                    <?php if($impuesto["nombre"] != "Hospital Universitario - Homeris"  || $numInforme == 1):?>
-                    <tr>
-                        <td style="text-align:left;"><?php echo $impuesto['nombre']; ?></td>
-                        <td><?php echo $impuesto['porcentaje'];?>%</td>
-                        <td><?php echo $impuesto['tipo']; ?></td>
-                        <?php if ($count == 1): ?>
-                        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-                            <h1><?php echo $filas8['dias']; ?></h1>
-                        </td>
-                        <?php endif; ?>
-
-                        <td>
-                            <?php  
-                                // correspondiente al acta
-                                if($impuesto['nombre'] != "Hospital Universitario - Homeris"){ 
-                                    echo number_format($estampilla,2);
-                                    $pagoTotalImpuestos   = $pagoTotalImpuestos  + $estampilla;
-                                }
-                                // Solo lo hace en la primera acta 
-                                // Ya que la estampilla también debemos mostrarla y agregarlo al total del pago
-                                if($numInforme == 1 && $impuesto['nombre'] == "Hospital Universitario - Homeris"){ 
-
-                                    echo number_format($estampilla,2);
-                                    $pagoTotalImpuestos   = $pagoTotalImpuestos + $estampilla;
-                                 } 
-                            ?>
-                        </td>
-
-                    </tr>
-                    <?php $count++; endif; ?>
-                    <?php } ?>
-                    <!-- Fila para los totales -->
-                    <tr>
-                        <td style="text-align:left;"><strong>
-                                <h3>Descuento Total:</h3>
-                            </strong></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <h4><?php echo number_format($pagoTotalImpuestos,2) ?></h4>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="col-md-12">
-                <h3>Nota aclaratoria:</h3>
-                <p>En relación con los contratos de prestación de servicios, se informa que el software refleja los
-                    descuentos correspondientes a las estampillas en el apartado de impuestos. Sin embargo, el descuento
-                    por concepto de <strong> Industria y Comercio </strong> no se encuentra incluido en el cálculo del
-                    programa, debido a
-                    que este porcentaje varía según la actividad económica de cada contratista. Es importante tener en
-                    cuenta que dicho impuesto sí se aplica y descuenta directamente en la nómina correspondiente.
-                </p>
-            </div>
-        </div>
-
-        <br>
-        <!--.................................................. AQUI TERMINA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI TERMINA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI TERMINA LA TABLA DE IMPUESTOS ......................................................-->
-
-        <!--.................................................. AQUI TERMINA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI TERMINA LA TABLA DE IMPUESTOS ......................................................-->
-        <!--.................................................. AQUI TERMINA LA TABLA DE IMPUESTOS ......................................................-->
         <hr>
         <h2 class="text-center blanco ">3.Proyeccion contractual</h2>
         <hr>
@@ -782,46 +668,85 @@ if(isset($_GET['mensaje'])){
         </div>
 
         <hr>
-        <p>El supervisor certifica que cumplió,durante el periodo del
-            <strong><?php echo date("d-m-Y",strtotime($filas8['periodo_ini']))?></strong>
-            al
-            <strong><?php echo date("d-m-Y",strtotime($filas8['periodo_fin']))?></strong> a satisfacción el objeto
-            presente
-            contrato,además
-            que ha revisado lo correspondiente a su afiliación al sistema Seguridad Social y ARL y se encuentra al
-            dia durante el mes de con dichas obligaciones legales.
-            De igual forma certifico que el contratista realizo el respaldo magnetico del informe.
-        </p>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="row g-3">
-            <div class="form-group col-md-6">
-                <hr style="width:50%;">
-                <label class="form-label"><strong><?php echo $NombreContratistas ?></strong></label><br>
-                <label class="form-label">Contratista</label>
+        <h2 class="text-center blanco">5.Novedades</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <th>Periodo Inicio</th>
+                        <th>Periodo Fin</th>
+                        <th>Dias</th>
+                        <th>Valor</th>
+                        <th>Acumulado</th>
+                        <th>Saldo</th>
+                        <th>Fecha de pago de Planilla</th>
+                        <th>Planilla</th>
+                        <th>Valor Pagado</th>
+                    </tr>
+                    <!------------MUESTRA LAS PROYECCIONES ACTUALES--------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+                    <tr>
+                        <td><?php echo $filas8['periodo_ini']?></td>
+                        <td><?php echo $filas8['periodo_fin']?></td>
+                        <td><?php echo $filas8['dias']?></td>
+                        <td><?php echo $filas8['valor_mes']?></td>
+                        <td><?php echo $filas8['acomulado']?></td>
+                        <td><?php echo $filas8['saldo']?></td>
+                        <td><input class="form-control" type="date" value="<?php echo $arrayActa[$i+1] ?>" disabled>
+                        </td>
+                        <td><input type="number" class="form-control" placeholder="Código"
+                                aria-label="Default select example" value="<?php echo $arrayActa[$i+2] ?>" required
+                                disabled></td>
+                        <td><input type="number" class="form-control" placeholder="$ cantidad"
+                                aria-label="Default select example" value="<?php echo $arrayActa[$i+3] ?>" disabled>
+                        </td>
+                    </tr>
+
+                    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                </table>
+
+
+            </div>
+            <p>El supervisor certifica que cumplió,durante el periodo del <?php echo $filas8['periodo_ini']?> a
+                <?php echo $filas8['periodo_fin']?> a satisfacción el objeto presente contrato,además
+                que ha revisado lo correspondiente a su afiliación al sistema Seguridad Social y ARL y se encuentra al
+                dia durante el mes de con dichas obligaciones legales.
+                De igual forma certifico que el contratista realizo el respaldo magnetico del informe. </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row g-3">
+                <div class="form-group col-md-6">
+                    <hr style="width:50%;">
+                    <label class="form-label"><strong><?php echo $NombreContratistas ?></strong></label><br>
+                    <label class="form-label">Contratista</label>
+                </div>
             </div>
         </div>
-</div>
-<!--valor usado para crear la acta-->
-<input type="hidden" class="form-control" name="encargado"
-    value="<?php if($Encargado == "Si"){echo "Si";}else{echo "No";} ?>" />
-<input type="hidden" class="form-control" name="nombre" value="<?php echo $NombreContratistas ?>" />
-<input type="hidden" class="form-control" name="nombreSupervisor" value="<?php echo $NombreSupervisor ?>" />
-<input type="hidden" class="form-control" name="num_informe" value="<?php echo $numInforme ?>" />
-<input type="hidden" class="form-control" name="idContrato" value="<?php echo $idContrato ?>" />
-<input type="hidden" class="form-control" name="idUsuario" value="<?php echo $row['idUsuario'] ?>" />
+        <!--valor usado para crear la acta-->
+        <input type="hidden" class="form-control" name="encargado"
+            value="<?php if($Encargado == "Si"){echo "Si";}else{echo "No";} ?>" />
+        <input type="hidden" class="form-control" name="nombre" value="<?php echo $NombreContratistas ?>" />
+        <input type="hidden" class="form-control" name="nombreSupervisor" value="<?php echo $NombreSupervisor ?>" />
+        <input type="hidden" class="form-control" name="num_informe" value="<?php echo $numInforme ?>" />
+        <input type="hidden" class="form-control" name="idContrato" value="<?php echo $idContrato ?>" />
+        <input type="hidden" class="form-control" name="idUsuario" value="<?php echo $row['idUsuario'] ?>" />
 
-<br>
-<br>
-<br>
-<div class="form-group col-md-12" style="text-align:right;">
-    <input type="submit" class="btn btn-primary" value="Guardar" />
-</div>
-</form>
+        <br>
+        <br>
+        <br>
+        <div class="form-group col-md-12" style="text-align:right;">
+            <input type="submit" class="btn btn-primary" value="Guardar" />
+        </div>
+    </form>
 </div>
 <br>
 <br>

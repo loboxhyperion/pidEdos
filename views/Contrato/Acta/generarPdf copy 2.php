@@ -511,220 +511,126 @@ $pdf->writeHTMLCell(0, 0, '', '', $sobrecargo, 0, 1, 0, true, '', true);
 //--//------------------------------------------------------------------//------------------------------------------------------------
 //--//------------------------------------------------------------------//------------------------------------------------------------
 //--//------------------------------------------------------------------//------------------------------------------------------------
-$query= "SELECT r.id,r.nombre,r.porcentaje,r.tipo,r.orden FROM contrato AS c 
-INNER JOIN  contrato_retencion AS cr ON c.id = cr.idContrato 
-INNER JOIN retencion AS r ON cr.idRetencion = r.id  
-WHERE c.id = $idContrato AND (r.orden = 1 OR r.orden = 2 OR r.orden = 3) ORDER BY r.orden ASC";
-
-$retenciones = mysqli_query($conexion,$query);
-
-$retencionesTabla= "";
+$impuestos = "";
 // Set some content to print
-$retencionesTabla .= '<h2 style="text-align:center">2.Seguridad Social E Impuestos</h2><br><br>
-<h3 style="text-align:center">Seguridad Social</h3>
+$impuestos  .= '<h2 style="text-align:center">2.Seguridad Social E Impuestos</h2>
 <table border ="1" cellpadding="2">
     <tr>
-        <th width="9%" style="text-align:center;"><strong>Item</strong></th>
-        <th width="4%" style="text-align:center;"><strong>%</strong></th>
-        <th width="9%" style="text-align:center;"><strong>Pagado por la entidad</strong></th>
-        <th width="8%" style="text-align:center;"><strong>Tipo</strong></th>
-        <th width="5%" style="text-align:center;"><strong>Dias a Pagar</strong></th>
-        <th width="10%" style="text-align:center;"><strong>Correspondiente al Acta</strong></th>
-        <th width="13%" style="text-align:center;"><strong>Salud</strong></th>
-        <th width="12%" style="text-align:center;"><strong>Pensión</strong></th>
-        <th width="12%" style="text-align:center;"><strong>ARL</strong></th>
-        <th width="9%" style="text-align:center;"><strong>Fecha afiliación</strong></th>
-        <th width="8%" style="text-align:center;"><strong>Día Habil Pago</strong></th>
+        <th width="9%"><strong>Item</strong></th>
+        <th width="4%"><strong>%</strong></th>
+        <th width="8%"><strong>Tipo</strong></th>
+        <th width="10%"><strong>Valor Total</strong></th>
+        <th width="10%"><strong>Valor Mes</strong></th>
+        <th width="10%"><strong>Valor Dia</strong></th>
+        <th width="5%"><strong>Dias a Pagar</strong></th>
+        <th width="9%"><strong>Correspondiente al Acta</strong></th>
+        <th width="7%"><strong>Pensión</strong></th>
+        <th width="5%"><strong>ARL</strong></th>
+        <th width="6%"><strong>Salud</strong></th>
+        <th width="9%"><strong>Fecha afiliación</strong></th>
+        <th width="8%"><strong>Día Habil Pago</strong></th>
     </tr>';
-    
+$cont = 1;
+$consulta2 = "SELECT * FROM `contrato_retencion` WHERE idContrato = $idContrato";
+$resultado2 = mysqli_query($conexion, $consulta2);
+$rowsImpuestos = mysqli_num_rows($resultado2);
 
-$count = 1;
-$pagoTotalActa = 0;
-$seguridadSocial = 0;
-$baseCotizacion = 0;
+$cont = 1;
+$sumBaseTotal = 0;
+$sumBaseMes = 0;
+$sumBaseDia = 0;
+$sumActa = 0;
+while ($idRetencion = mysqli_fetch_array($resultado2)) {
+    $consulta3 = "SELECT * FROM `retencion` WHERE id = $idRetencion[idRetencion] ";
+    $resultado3 = mysqli_query($conexion, $consulta3);
+    $itemRetencion = mysqli_fetch_array($resultado3);
 
-while($retencion=mysqli_fetch_array($retenciones)){ 
-
-    if($count == 1){
-            // sacamos la base de cotización
-            $baseCotizacion = round(($retencion['porcentaje']/100) * ($filas8['valor_dia'] * $filas8['dias']));
-            $baseCotizacion =  $baseCotizacion > $minimoMensual ? $baseCotizacion : $minimoMensual;
-    }else{
-        $seguridadSocial = round(($retencion['porcentaje'] / 100) * $baseCotizacion);
-    }
-
-    // para el caso que sea riesgo 5
-    $entidadPaga = $retencion['nombre'] == "Riesgo 5"
-    ? $seguridadSocial  //si lo es
-    : 0;
-
-    $retencionesTabla .= '<tr>
-                    <td>' . $retencion['nombre'] . '</td>
-                    <td>' . $retencion['porcentaje'] . '</td>
-                    <td>' .  number_format($entidadPaga,2). '</td>
-                    <td>' . $retencion['tipo'] . '</td>
+    $impuestos  .= '<tr>
+                    <td>' . $itemRetencion['nombre'] . '</td>
+                    <td>' . $itemRetencion['porcentaje'] . '</td>
+                    <td>' . $itemRetencion['tipo'] . '</td>
                     ';
-    // Para los días
-    if ($count == 1){
-        $retencionesTabla .= '<td rowspan="4" style="text-align:center; vertical-align:middle;">
-                                <h1>'. $filas8['dias'] .'</h1>
-                              </td>';
-    }
-    $retencionesTabla .= '<td>';
-    // correspondiente al acta
-    if($count == 1){ 
-        $retencionesTabla .= ''.number_format($baseCotizacion,2).'';
-    }elseif($entidadPaga > 0){
-        $retencionesTabla .= ''.number_format(0,2).'';
-    }else{
-        $retencionesTabla .= ''.number_format($seguridadSocial,2).'';
-        $pagoTotalActa  = $pagoTotalActa + $seguridadSocial;
-    } 
-    $retencionesTabla .= '</td>';
-    
 
-    if ($count == 1){
-        $retencionesTabla .= '
-        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-            <h4>'. $row['salud'] . '</h4>
-        </td>
-        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-            <h4>'. $row['pension'] . '</h4>
-        </td>
-        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-            <h4>'. $row['arl'] . '</h4>
-        </td>
-        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-            <h4>'.date('d-m-Y', strtotime($row['fecha_activacion'])) . '</h4>
-        </td>
-        <td rowspan="4" style="text-align:center; vertical-align:middle;">
-            <h1>'. $row['dia_habil_pago'] . '</h1>
-        </td>';   
+    ///para sacar el valor total
+    if ($cont == 1) {
+
+        $baseCotizacionTotal = round(($itemRetencion['porcentaje'] / 100) * ($row['valor_contrato']));
+        if ($baseCotizacionTotal < ($minimoDia * $row['duracion'])) {
+            $baseCotizacionTotal = $minimoDia * $row['duracion'];
+        }
+        $impuestos  .= '<td>' . number_format($baseCotizacionTotal, 2, ".", ",") . '</td>';
+    } else {
+        $impuestos  .= '<td>' . number_format(round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionTotal), 2, ".", ",") . '</td>';
+        $sumBaseTotal = $sumBaseTotal + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionTotal);
     }
-    
-    $retencionesTabla .= '</tr>';
-    $count++;
+    ///para sacar el valor mes
+    if ($cont == 1) {
+        $baseCotizacion = round(($itemRetencion['porcentaje'] / 100) * ($row['valorMes']));
+        //$baseCotizacion = $baseCotizacion / $row['num_actas'];
+        if ($baseCotizacion < $minimoMensual) {
+            $baseCotizacion = $minimoMensual; 
+        }
+        $impuestos  .= '<td>' . number_format($baseCotizacion, 2, ".", ",") . '</td>';
+    } else {
+        $impuestos  .= '<td>' . number_format(round(($itemRetencion['porcentaje'] / 100) * $baseCotizacion), 2, ".", ",") . '</td>';
+        $sumBaseMes = $sumBaseMes + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacion);
+    }
+    ///para sacar el valor dia
+    if ($cont == 1) {
+        $baseCotizacionDia = round($baseCotizacion / 30);
+        $impuestos  .= '<td>' . number_format($baseCotizacionDia, 2, ".", ",") . '</td>';
+    } else {
+        $impuestos  .= '<td>' . number_format(round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia), 2, ".", ",") . '</td>';
+        $sumBaseDia = $sumBaseDia + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia);
+    }
+
+    $impuestos .= '<td  align="center">' . $filas8['dias'] . '</td>';
+    if ($cont == 1) {
+        $impuestos .= '<td>' . number_format($baseCotizacionDia * $filas8['dias'], 2, ".", ",") . '</td>';
+    } else {
+        $impuestos .= '<td>' . number_format(round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia) * $filas8['dias'], 2, ".", ",") . '</td>';
+        $sumActa  = $sumActa + round(($itemRetencion['porcentaje'] / 100) * $baseCotizacionDia) * $filas8['dias'];
+    }
+    if ($cont == 1) {
+        $impuestos .= '<td rowspan="4" align="center"><strong>' . $row['pension'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><strong>' . $row['arl'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><strong>' . $row['salud'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><strong>' . $row['fecha_activacion'] . '</strong></td>';
+        $impuestos .= '<td rowspan="10" style="display: flex; align-items: center; justify-content: center; text-align: center;"><h1>' . $row['dia_habil_pago'] . '</h1></td>';
+    }
+    $impuestos .= '</tr>';
+
+    //para los totales impuestos y para estampillas
+    if ($cont == 4 || $cont == $rowsImpuestos) {
+        $baseCotizacionTotal =  $row['valor_contrato'];
+        $baseCotizacion = $row['valorDia'] * 30;
+        $baseCotizacionDia = $row['valorDia'];
+
+        $impuestos .= '<tr>
+                       <td colspan="3" style="text-align:center;"><strong>Total</strong></td>
+                       <td><strong>' . number_format($sumBaseTotal, 2, ".", ",") . '</strong></td>
+                       <td><strong>' . number_format($sumBaseMes, 2, ".", ",") . '</strong></td>
+                       <td><strong>' . number_format($sumBaseDia, 2, ".", ",") . '</strong></td>
+                       <td></td>
+                       <td><strong>' . number_format($sumActa, 2, ".", ",") . '</strong></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       ';
+        $impuestos .= '</tr>';
+        $sumBaseTotal = 0;
+        $sumBaseMes = 0;
+        $sumBaseDia = 0;
+        $sumActa = 0;
+    }
+    $cont++;
 }
-// Para la fila de totales
-$retencionesTabla .= '<tr>
-                    <td colspan="6" style="text-align:center; vertical-align:middle;">
-                        <h3>Total a Pagar:</h3>
-                    </td>
-                    <td colspan="5" style="text-align:center; vertical-align:middle;">
-                        <h3>' . number_format($pagoTotalActa,2) . '</h3>
-                    </td>';
+$impuestos .= '</table><br>';
 
-$retencionesTabla .= '</tr>';
-$retencionesTabla .= '</table>';
 
-// Nota aclaratoria si pagas mas
-$retencionesTabla .= '
-                    <p>
-                        <h4>Observación</h4>'
-                        .$filas9['mas_cotizacion'].
-                    '</p>';
 
 // Print text using writeHTMLCell()
-$pdf->writeHTMLCell(0, 0, '', '', $retencionesTabla, 0, 1, 0, true, '', true);
-
-
-//---------------------------------------------2. Impuestos--------------------------------------------------------------
-
-
-//--//------------------------------------------------------------------//------------------------------------------------------------
-//--//------------------------------------------------------------------//------------------------------------------------------------
-//--//------------------------------------------------------------------//------------------------------------------------------------
-//--//------------------------------------------------------------------//------------------------------------------------------------
-//--//------------------------------------------------------------------//------------------------------------------------------------
-//--//------------------------------------------------------------------//------------------------------------------------------------
-
-$query= "SELECT r.id,r.nombre,r.porcentaje,r.tipo,r.orden FROM contrato AS c 
-INNER JOIN  contrato_retencion AS cr ON c.id = cr.idContrato 
-INNER JOIN retencion AS r ON cr.idRetencion = r.id  
-WHERE c.id = $idContrato AND r.orden = 4  ORDER BY r.orden ASC";
-
-$impuestos = mysqli_query($conexion,$query);
-
-$impuestosTabla= "";
-// Set some content to print
-$impuestosTabla .= '<h3 style="text-align:center">Impuestos</h3>
-<table border ="1" cellpadding="2">
-    <tr>
-        <th width="30%" style="text-align:center;"><strong>Item</strong></th>
-        <th width="10%" style="text-align:center;"><strong>%</strong></th>
-        <th width="20%" style="text-align:center;"><strong>Tipo</strong></th>
-        <th width="20%" style="text-align:center;"><strong>Dias a Pagar</strong></th>
-        <th width="20%" style="text-align:center;"><strong>Correspondiente al Acta</strong></th>
-    </tr>';
-    
-
-$count = 1;
-$pagoTotalImpuestos = 0;
-
-while($impuesto=mysqli_fetch_array($impuestos)){ 
-
-    
-    //La condicional verdadera solo se hace en la primera acta
-    $estampilla = $numInforme == 1 && $impuesto['nombre'] == "Hospital Universitario - Homeris" 
-    ? round(($impuesto['porcentaje'] / 100) * ($row['valor_contrato']))// Se descuenta el impuesto de la estampilla hospital del valor total del contrato
-    : round(($impuesto['porcentaje'] / 100) *  ($filas8['valor_dia'] * $filas8['dias']));// de no ser la primera acta sacamos el calculo de la estampilla normal segun los dias a pagar
-
-    // solo deja pasar 1 vez el impuesto hospital en el acta 1 
-    if($impuesto["nombre"] != "Hospital Universitario - Homeris"  || $numInforme == 1){
-
-        $impuestosTabla .= '<tr style="text-align:center;">
-        <td>' . $impuesto['nombre'] . '</td>
-        <td>' . $impuesto['porcentaje'] . '</td>
-        <td>' . $impuesto['tipo'] . '</td>
-        ';
-        // Para los días
-        if ($count == 1){
-            $impuestosTabla .= '<td rowspan="4" style="text-align:center; vertical-align:middle;">
-                                    <h1>'. $filas8['dias'] .'</h1>
-                                </td>';
-        }
-        $impuestosTabla .= '<td>';
-        // correspondiente al acta
-        if($impuesto['nombre'] != "Hospital Universitario - Homeris"){
-            $impuestosTabla .= ''.number_format($estampilla,2).'';
-            $pagoTotalImpuestos   = $pagoTotalImpuestos  + $estampilla;
-        }
-        // Solo lo hace en la primera acta 
-        // Ya que la estampilla también debemos mostrarla y agregarlo al total del pago
-        if($numInforme == 1 && $impuesto['nombre'] == "Hospital Universitario - Homeris"){ 
-            $impuestosTabla .= ''.number_format($estampilla,2).'';
-            $pagoTotalImpuestos   = $pagoTotalImpuestos + $estampilla;
-        } 
-        $impuestosTabla .= '</td>'; 
-        $impuestosTabla .= '</tr>';
-        $count++;
-        
-    }
-    
-}
-// Para la fila de totales
-$impuestosTabla .= '<tr>
-                    <td colspan="4" style="text-align:center; vertical-align:middle;">
-                        <h3>Total de Impuestos en Acta:</h3>
-                    </td>
-                    <td colspan="1" style="text-align:center; vertical-align:middle;">
-                        <h3>' . number_format($pagoTotalImpuestos,2) . '</h3>
-                    </td>';
-
-$impuestosTabla .= '</tr>';
-$impuestosTabla .= '</table>';
-
-$impuestosTabla .= '
-                    <p>
-                        <h4>Nota Aclaratoria</h4>
-                        En relación con los contratos de prestación de servicios, se informa que el software refleja los descuentos correspondientes a las estampillas en el apartado de impuestos. Sin embargo, el descuento por concepto de Industria y Comercio no se encuentra incluido en el cálculo del programa, debido a que este porcentaje varía según la actividad económica de cada contratista. Es importante tener en cuenta que dicho impuesto sí se aplica y descuenta directamente en la nómina correspondiente.
-                    </p>
-                 ';
-
-// Print text using writeHTMLCell()
-$pdf->writeHTMLCell(0, 0, '', '', $impuestosTabla, 0, 1, 0, true, '', true);
-
-// ---------------------------------------------------------
+$pdf->writeHTMLCell(0, 0, '', '', $impuestos, 0, 1, 0, true, '', true);
 
 //--//------------------------------------------------------------------//------------------------------------------------------------
 //--//------------------------------------------------------------------//------------------------------------------------------------
@@ -814,7 +720,7 @@ $proyeccion .= '</table><br>';
 
 // Print text using writeHTMLCell()
 $pdf->writeHTMLCell(0, 0, '', '', $proyeccion, 0, 1, 0, true, '', true);
-// $pdf->AddPage();
+$pdf->AddPage();
 
 //--//------------------------------------------------------------------//------------------------------------------------------------
 //--//------------------------------------------------------------------//------------------------------------------------------------
