@@ -311,14 +311,22 @@ $pdf->Ln(4);
 //--//------------------------------------------------------------------//FILA11//------------------------------------------------------------
 //--//------------------------------------------------------------------//FILA11//------------------------------------------------------------
 //--//------------------------------------------------------------------//FILA11//------------------------------------------------------------
-// Campo1
-$pdf->MultiCell(192, 3, mb_convert_encoding('Campo1: ' . $row['campo1'], 'ISO-8859-1', 'UTF-8'), 1, 'J');
-// Campo2
-$pdf->MultiCell(192, 3, mb_convert_encoding('Campo2: ' . $row['campo2'], 'ISO-8859-1', 'UTF-8'), 1, 'J');
 //Objeto
 $pdf->MultiCell(192, 3, mb_convert_encoding('Objeto: ' . $row['objeto'], 'ISO-8859-1', 'UTF-8'), 1, 'J');
 //Forma de pago
 $pdf->MultiCell(192, 3, mb_convert_encoding('Forma de pago: ' . $row['forma_pago'], 'ISO-8859-1', 'UTF-8'), 1, 'J');
+// Garantia
+$pdf->MultiCell(192, 3, mb_convert_encoding('Garantias: ' . $row['garantia'], 'ISO-8859-1', 'UTF-8'), 1, 'J');
+//--//------------------------------------------------------------------//FILA12//------------------------------------------------------------
+//--//------------------------------------------------------------------//FILA12//------------------------------------------------------------
+//--//------------------------------------------------------------------//FILA12//------------------------------------------------------------
+$pdf->SetFont('Arial', 'B', 5);
+$pdf->Cell(96, 5, mb_convert_encoding('Cobertura Desde', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+$pdf->Cell(96, 5, mb_convert_encoding('Cobertura hasta', 'ISO-8859-1', 'UTF-8'), 1, 1, 'C', 0);
+//-----------------------------------------DATOS--------------------------------------------------------
+$pdf->SetFont('Arial', 'B', 5);
+$pdf->Cell(96, 5, mb_convert_encoding($row['cobertura_desde'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+$pdf->Cell(96, 5, mb_convert_encoding($row['cobertura_hasta'], 'ISO-8859-1', 'UTF-8'), 1, 1, 'C', 0);
 //Observación
 $pdf->MultiCell(192, 3, mb_convert_encoding('Observaciones: ' . $row['observaciones'], 'ISO-8859-1', 'UTF-8'), 1, 1);
 $pdf->Ln(4);
@@ -334,7 +342,7 @@ $pdf->Ln(4);
 //--//------------------------------------------------------------------//------------------------------------------------------------
 // add text
 $pdf->SetFont('Arial', '', 6);
-$pdf->MultiCell(192, 3, mb_convert_encoding('El ' . $fechaActa . ' en el municipio de Dosquebradas Risaralda se reunieron en las oficionas de la EMPRESA DE DESARROLLO URBANO RURA EDOS, el supervisor ' . $NombreSupervisor . ' y el/ella contratista ' . $NombreContratistas . ' con el fin de iniciar las obras y/o actividades correspondientes al contrato de la referencia, lo anterior se motiva en las siguientes consideraciones:', 'ISO-8859-1', 'UTF-8'), 0, 'J');
+$pdf->MultiCell(192, 3, mb_convert_encoding('El ' . date('d-m-Y',strtotime($fechaActa)) . ' en el municipio de Dosquebradas Risaralda se reunieron en las oficionas de la EMPRESA DE DESARROLLO URBANO RURA EDOS, el supervisor ' . $NombreSupervisor . ' y el/ella contratista ' . $NombreContratistas . ' con el fin de iniciar las obras y/o actividades correspondientes al contrato de la referencia, lo anterior se motiva en las siguientes consideraciones:', 'ISO-8859-1', 'UTF-8'), 0, 'J');
 $pdf->Ln(3);
 
 $pdf->MultiCell(192, 3, mb_convert_encoding('1. El contratista entegó completa la documentación requerida para el inicio del contrato, incluyendo la afilación a ARL.', 'ISO-8859-1', 'UTF-8'), 0, 'J');
@@ -355,20 +363,21 @@ $pdf->Ln(12);
 
 //Espacio Supervisor
 $pdf->SetFont('Arial', '', 8);
-$pdf->Cell(0, 10, '__________________________');
+$pdf->Cell(0, 10, '________________________________');
 
 // solo aplica si se le definio un segundo supervisor
 if (isset($rowSupervisor2) and $rowSupervisor2['id'] != 0) {
     //Espacio Supervisor2
     $pdf->SetX(70);
-    $pdf->Cell(0, 10,'__________________________');
+    $pdf->Cell(0, 10,'______________________________');
 }
 
 
 //Espacio Contratista
 $pdf->SetX(140);
-$pdf->Cell(0, 10, '_______________________');
+$pdf->Cell(0, 10, '__________________________________');
 $pdf->Ln(5);
+
 
 //-----------------------------------------DATOS--------------------------------------------------------
 //Valor Supervisor
@@ -402,6 +411,26 @@ if (isset($rowSupervisor2) and $rowSupervisor2['id'] != 0) {
 //Contratista Nombre
 $pdf->SetX(140);
 $pdf->Cell(0, 10, mb_convert_encoding('CONTRATISTA', 'ISO-8859-1', 'UTF-8'));
+$pdf->Ln(15);
+
+//Firmas gerente-----------------------------------------------------------
+//Firmas gerente-----------------------------------------------------------
+//Firmas gerente-----------------------------------------------------------
+
+//Espacio gerente
+$pdf->SetFont('Arial', '', 8);
+$pdf->Cell(0, 10, '______________________________');
+$pdf->Ln(5);
+
+//-----------------------------------------DATOS1--------------------------------------------------------
+//Valor Gerente
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->Cell(0, 10, mb_convert_encoding($rowOrdenador['nombre']." ". $rowOrdenador['apellidos'], 'ISO-8859-1', 'UTF-8'));
+$pdf->Ln(5);
+//-----------------------------------------DATOS2--------------------------------------------------------
+$pdf->SetFont('Arial', '', 6);
+$pdf->Cell(0, 10, mb_convert_encoding('GERENTE', 'ISO-8859-1', 'UTF-8'));
+$pdf->Ln(15);
 
 $pdf->Output();
 /*$pdf->Cell(40,10,"El ".$fechaActa." en el municipio de Dosquebradas Risaralda se reunieron en las oficionas del Instituto" );

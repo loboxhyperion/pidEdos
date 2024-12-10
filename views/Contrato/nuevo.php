@@ -219,12 +219,16 @@ include('../partials/menusub.php');
             <input type="hidden" class="form-control currency" aria-label="Default select example" name="valorMes">
 
             <div class="form-group col-md-12">
-                <label for="campo1" class="form-label">Campo 1</label>
-                <textarea class="form-control" aria-label="With textarea" name="campo1" rows="4" required></textarea>
+                <label for="garantia" class="form-label">Garantias</label>
+                <textarea class="form-control" aria-label="With textarea" name="garantia" rows="4" required></textarea>
             </div>
-            <div class="form-group col-md-12">
-                <label for="campo2" class="form-label">Campo2</label>
-                <textarea class="form-control" aria-label="With textarea" name="campo2" rows="4" required></textarea>
+            <div class="form-group col-md-6">
+                <label for="cobertura_desde" class="form-label">Cobertura Desde</label>
+                <input class="form-control" type="date" name="cobertura_desde" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="cobertura_hasta" class="form-label">Cobertura Hasta</label>
+                <input class="form-control" type="date" name="cobertura_hasta" required>
             </div>
             <div class="form-group col-md-12">
                 <label for="objeto" class="form-label">Objeto</label>
