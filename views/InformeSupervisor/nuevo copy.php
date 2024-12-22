@@ -104,11 +104,10 @@ include("../partials/layout.php");
                             $result3 = mysqli_query($conexion, $query3) or die("fallo en la conexión");
                             $filas3 = mysqli_fetch_array($result3);
 
-                             //para poder sacar el numero del informe
+                            //para poder sacar el numero del informe
                             //coge la última acta registrada 
                             $query4= "SELECT * FROM proyeccion_contractual  WHERE idContrato = $filas[idContrato] ORDER BY id DESC LIMIT 1";
-                            $result4 = mysqli_query($conexion,$query4) or die("fallo en la conexión");
-                            $rowAcomulado = mysqli_fetch_array($result4);
+                            $resultAcomulado = mysqli_query($conexion,$query4) or die("fallo en la conexión");
 
                         ?>
                         <tr>
@@ -129,10 +128,10 @@ include("../partials/layout.php");
                             <input type="hidden" class="form-control" name="acumulado[]"
                                 value="<?php echo isset($filas2['acumulado']) ? $filas2['acumulado'] : 0 ?>" />
                             <!---->
-                            <td><?php echo number_format(($rowAcomulado['acomulado'] - $filas2['acumulado']), 2, ".", ",") ?>
+                            <td><?php echo number_format(($resultAcomulado['acomulado'] - $filas2['acumulado']), 2, ".", ",") ?>
                             </td>
                             <input type="hidden" class="form-control" name="saldo[]"
-                                value="<?php echo $rowAcomulado['acomulado'] - $filas2['acumulado'] ?>" />
+                                value="<?php echo $filas['valor_contrato'] - $filas2['acumulado'] ?>" />
                             <!---->
                             <!---->
                             <td><?php echo $filas3['alcances_num'] ?></td>
@@ -147,7 +146,7 @@ include("../partials/layout.php");
                             <input type="hidden" class="form-control" name="alcances_avances[]"
                                 value="<?php echo ($filas3['impacto'] * 100)/ $filas3['alcances_num']?>" />
                             <!---->
-                            <td><?php echo  round(($filas2['acumulado'] * 100) / $rowAcomulado['acomulado'], 2) . "%" ?>
+                            <td><?php echo  round(($filas2['acumulado'] * 100) / $filas['valor_contrato'], 2) . "%" ?>
                             </td>
                             <input type="hidden" class="form-control" name="ejecucion_financiera[]"
                                 value="<?php echo ($filas2['acumulado'] * 100) / $filas['valor_contrato'] ?>" />

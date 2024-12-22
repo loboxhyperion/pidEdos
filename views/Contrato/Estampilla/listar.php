@@ -88,7 +88,8 @@ include('../../partials/menusub.php');
                     <td>
                         <div style="display:flex; justify-content:space-between">
                             <?php 
-                                        if($filas2['orden'] == 4 && ($_SESSION['rol'] == 1 or $_SESSION['rol'] == 2 )){
+                                        // if($filas2['orden'] == 4 && ($_SESSION['rol'] == 3 or $_SESSION['rol'] == 2 )){
+                                        if($filas2['orden'] == 4 && ($_SESSION['rol'] == 3 or $_SESSION['rol'] == 2 )){
                             ?>
                             <a class="btn btn-danger btn-sm"
                                 href="eliminar.php?idEstampilla=<?php echo $filas2['id'] ?>&id=<?php echo $idContrato ?>&nombre=<?php echo $NombreContratistas?>"><i

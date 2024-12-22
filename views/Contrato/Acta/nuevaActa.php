@@ -405,9 +405,11 @@ if(isset($_GET['mensaje'])){
                         while($retencion =mysqli_fetch_array($retenciones)){ 
 
                             if($count == 1){
+                                // Verificar si se cotiza con la base bajo el minimo o no
+                                $verificarBaseCotizacion = round(($retencion['porcentaje']/100) * $row['valorMes']);
                                 // sacamos la base de cotización
                                 $baseCotizacion = round(($retencion['porcentaje']/100) * ($filas8['valor_dia'] * $filas8['dias']));
-                                $baseCotizacion =  $baseCotizacion > $minimoMensual ? $baseCotizacion : $minimoMensual;
+                                $baseCotizacion =  $verificarBaseCotizacion > $minimoMensual ? $baseCotizacion : $minimoMensual;
                             }else{
                                 $seguridadSocial = round(($retencion['porcentaje'] / 100) * $baseCotizacion);
                             }
@@ -473,10 +475,8 @@ if(isset($_GET['mensaje'])){
                         <td></td>
                         <td>
                             <h4><?php echo number_format($pagoTotalActa,2) ?></strong></h4>
-                            <?php if($cont == 4){ ?>
                             <input type="hidden" class="form-control" name="valorPlanillaReal"
                                 value="<?php echo $pagoTotalActa ?>" />
-                            <?php } ?>
                         </td>
                     </tr>
                 </table>

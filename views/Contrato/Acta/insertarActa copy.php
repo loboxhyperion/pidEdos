@@ -26,7 +26,9 @@ $valorPlanillaReal = $_POST['valorPlanillaReal'];
 $encargado = $_POST['encargado'];
 $idUsuario = $_POST['idUsuario'];
 
+$mas_cotizacion = $_POST['mas_cotizacion'];
 
+echo "<br>".$valorPlanillaReal;
 echo "<br>".$numInforme;
 // echo "<br>". $fecha_informe;
 // echo "<br>". $fecha_ini;
@@ -53,8 +55,10 @@ if ($fecha_informe < $fecha_fin_periodo) {
     $message = "La fecha del informe debe cumplir el periodo de vencimiento";
     header("location:nuevaActa.php?id=" . $idContrato . "&nombre=" . $NombreContratistas . "&NombreSupervisor=" . $NombreSupervisor . "&num_informe=" . $numInforme . "&mensaje=" . $message);
 } else {
-    $query = "INSERT INTO acta (`num_informe`,`fecha_informe`, `fecha_ini`, `fecha_fin`, `diasPagos`, `valor`, `acumulado`, `saldo`, `numPlanilla`, `fechaPlanilla`, `valorPlanilla`, `estado`, `observaciones`, `idSupervisor`,`idContrato`,`valorPlanillaReal`, `encargado`, `idUsuario`) 
-                      VALUES ('$numInforme','$fecha_informe','$fecha_ini','$fecha_fin','$diasPagos','$valor','$acumulado','$saldo','$numPlanilla','$fechaPlanilla','$valorPlanilla','Pendiente','$observaciones','$idSupervisor','$idContrato','$valorPlanillaReal','$encargado', '$idUsuario')";
+    $query = "INSERT INTO acta (`num_informe`,`fecha_informe`, `fecha_ini`, `fecha_fin`, `diasPagos`, `valor`, `acumulado`, `saldo`, `numPlanilla`, `fechaPlanilla`,
+             `valorPlanilla`, `estado`, `observaciones`, `idSupervisor`,`idContrato`,`valorPlanillaReal`, `encargado`, `idUsuario`,`mas_cotizacion`) VALUES ('$numInforme',
+             '$fecha_informe','$fecha_ini','$fecha_fin','$diasPagos','$valor','$acumulado','$saldo','$numPlanilla','$fechaPlanilla','$valorPlanilla','Pendiente',
+             '$observaciones','$idSupervisor','$idContrato','$valorPlanillaReal','$encargado', '$idUsuario','$mas_cotizacion')";
 
     $result = mysqli_query($conexion, $query); //or die ("No se puede establecer conexion con la DB en acta.");
     // $result = false;
@@ -77,16 +81,26 @@ if ($fecha_informe < $fecha_fin_periodo) {
 
         //insertamos las actividades 
         for ($i = 0; $i < count($idAlcances); $i++) {
-            //echo $Alcances[$i];
-            $query1 = "INSERT INTO actividad(`descripcion`, `ubicacion`, `numInforme`,`idActa`, `idAlcance`, `idContrato`) VALUES ('$Actividades[$i]','$Ubicaciones[$i]','$numInforme','$idActa','$idAlcances[$i]','$idContrato')";
-            $result1 = mysqli_query($conexion, $query1) or die("No se puede establecer conexion con la DB en actividades.");
-            //Comrpueba si el alcance se impacto
-            if ($Actividades[$i] <> "" && $Ubicaciones[$i] <> "") {
-                //actualizar el valor de si se impacto o no el alcance
-                $query2 = "UPDATE `alcance` SET `impacto`='Si' WHERE id = $idAlcances[$i]";
-                $result2 = mysqli_query($conexion, $query2);
+            $actividad = mysqli_real_escape_string($conexion, $Actividades[$i]);
+            $ubicacion = mysqli_real_escape_string($conexion, $Ubicaciones[$i]);
+            $alcance = mysqli_real_escape_string($conexion, $idAlcances[$i]);
+        
+            // Insertar actividad
+            $query1 = "INSERT INTO actividad(`descripcion`, `ubicacion`, `numInforme`,`idActa`, `idAlcance`, `idContrato`) 
+                       VALUES ('$actividad','$ubicacion','$numInforme','$idActa','$alcance','$idContrato')";
+            if (!$result1=mysqli_query($conexion, $query1)) {
+                die("Error al insertar actividad: " . mysqli_error($conexion) . " - Consulta: $query1");
+            }
+        
+            // Verificar si la actividad tiene datos válidos para actualizar el impacto
+            if (!empty($actividad) && !empty($ubicacion)) {
+                $query2 = "UPDATE `alcance` SET `impacto`='Si' WHERE id = '$alcance'";
+                if (!$result2=mysqli_query($conexion, $query2)) {
+                    die("Error al actualizar impacto: " . mysqli_error($conexion) . " - Consulta: $query2");
+                }
             }
         }
+        
         //Para realizar las Retenciones---------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------

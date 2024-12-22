@@ -1,142 +1,130 @@
 <?php
-// antes de cualquier línea de código html o php:
-//evita que no se buque el header para redirigir a otra pagina
+// Evitar problemas de redirección
 ob_start();
 include('../../../db.php');
-$NombreContratistas = $_POST["nombre"];
-$NombreSupervisor = $_POST["nombreSupervisor"];
-$numInforme = $_POST['num_informe'];
-$idContrato = $_POST['idContrato'];
-$idSupervisor = $_POST['idSupervisor'];
-$fecha_informe = $_POST['fecha_informe'];
-$fecha_ini = $_POST['fecha_ini'];
-$fecha_fin = $_POST['fecha_fin'];
-$diasPagos = $_POST['diasPagos'];
-$valor = $_POST['valor'];
-$acumulado = $_POST['acumulado'];
-$saldo = $_POST['saldo'];
-$numPlanilla = $_POST['numPlanilla'];
-$fechaPlanilla = $_POST['fechaPlanilla'];
-$valorPlanilla = $_POST['valorPlanilla'];
-$idAlcances = $_POST['idAlcance'];
-$Actividades = $_POST['actividad'];
-$Ubicaciones = $_POST['ubicacion'];
-$observaciones = $_POST['observaciones'];
-$valorPlanillaReal = $_POST['valorPlanillaReal'];
-$encargado = $_POST['encargado'];
-$idUsuario = $_POST['idUsuario'];
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$mas_cotizacion = $_POST['mas_cotizacion'];
+// Validar y sanitizar datos
+$NombreContratistas = $_POST["nombre"] ?? '';
+$NombreSupervisor = $_POST["nombreSupervisor"] ?? '';
+$numInforme = $_POST['num_informe'] ?? '';
+$idContrato = $_POST['idContrato'] ?? '';
+$idSupervisor = $_POST['idSupervisor'] ?? '';
+$fecha_informe = $_POST['fecha_informe'] ?? '';
+$fecha_ini = $_POST['fecha_ini'] ?? '';
+$fecha_fin = $_POST['fecha_fin'] ?? '';
+$diasPagos = $_POST['diasPagos'] ?? '';
+$valor = $_POST['valor'] ?? '';
+$acumulado = $_POST['acumulado'] ?? '';
+$saldo = $_POST['saldo'] ?? '';
+$numPlanilla = $_POST['numPlanilla'] ?? '';
+$fechaPlanilla = $_POST['fechaPlanilla'] ?? '';
+$valorPlanilla = $_POST['valorPlanilla'] ?? '';
+$idAlcances = $_POST['idAlcance'] ?? [];
+$Actividades = $_POST['actividad'] ?? [];
+$Ubicaciones = $_POST['ubicacion'] ?? [];
+$observaciones = $_POST['observaciones'] ?? 'NA';
+$valorPlanillaReal = $_POST['valorPlanillaReal'] ?? '';
+$encargado = $_POST['encargado'] ?? '';
+$idUsuario = $_POST['idUsuario'] ?? '';
+$mas_cotizacion = $_POST['mas_cotizacion'] ?? 'NA';
 
+// Hacer un var_dump para ver el contenido de las variables
+// echo "<pre>";
+// var_dump([
+//     'NombreContratistas' => $NombreContratistas,
+//     'NombreSupervisor' => $NombreSupervisor,
+//     'numInforme' => $numInforme,
+//     'idContrato' => $idContrato,
+//     'idSupervisor' => $idSupervisor,
+//     'fecha_informe' => $fecha_informe,
+//     'fecha_ini' => $fecha_ini,
+//     'fecha_fin' => $fecha_fin,
+//     'diasPagos' => $diasPagos,
+//     'valor' => $valor,
+//     'acumulado' => $acumulado,
+//     'saldo' => $saldo,
+//     'numPlanilla' => $numPlanilla,
+//     'fechaPlanilla' => $fechaPlanilla,
+//     'valorPlanilla' => $valorPlanilla,
+//     'idAlcances' => $idAlcances,
+//     'Actividades' => $Actividades,
+//     'Ubicaciones' => $Ubicaciones,
+//     'observaciones' => $observaciones,
+//     'valorPlanillaReal' => $valorPlanillaReal,
+//     'encargado' => $encargado,
+//     'idUsuario' => $idUsuario,
+//     'mas_cotizacion' => $mas_cotizacion
+// ]);
+// echo "</pre>";
+exit; // Detener la ejecución para inspeccionar el contenido
 
-echo "<br>".$numInforme;
-// echo "<br>". $fecha_informe;
-// echo "<br>". $fecha_ini;
-// echo "<br>". $fecha_fin;
-// echo "<br>". $diasPagos;
-// echo "<br>". $valor;
-// echo "<br>". $acumulado;
-// echo "<br>". $saldo;
-// echo "<br>". $numPlanilla;
-// echo "<br>". $fechaPlanilla;
-// echo "<br>". $valorPlanilla;
-// echo "<br>". $idContrato;
-// echo "<br>". $idSupervisor;
-// for($i = 0; $i < count($idAlcances); $i++){
-//     echo "<br> alcance:". $idAlcances[$i];
-//     echo "<br> Actividad:". $Actividades[$i];
-//     echo "<br> Ubicacion:". $Ubicaciones[$i];
-// }
-
-// Rectifica que la fecha del informe no sea inferior a la fecha fin del periodo
-$fecha_fin_periodo = date("Y-m-d", strtotime($fecha_fin));
-echo "<br>" . $fecha_fin_periodo;
-if ($fecha_informe < $fecha_fin_periodo) {
+// Validar fechas
+if (strtotime($fecha_informe) < strtotime($fecha_fin)) {
     $message = "La fecha del informe debe cumplir el periodo de vencimiento";
-    header("location:nuevaActa.php?id=" . $idContrato . "&nombre=" . $NombreContratistas . "&NombreSupervisor=" . $NombreSupervisor . "&num_informe=" . $numInforme . "&mensaje=" . $message);
-} else {
-    $query = "INSERT INTO acta (`num_informe`,`fecha_informe`, `fecha_ini`, `fecha_fin`, `diasPagos`, `valor`, `acumulado`, `saldo`, `numPlanilla`, `fechaPlanilla`,
-             `valorPlanilla`, `estado`, `observaciones`, `idSupervisor`,`idContrato`,`valorPlanillaReal`, `encargado`, `idUsuario`,`mas_cotizacion`) VALUES ('$numInforme',
-             '$fecha_informe','$fecha_ini','$fecha_fin','$diasPagos','$valor','$acumulado','$saldo','$numPlanilla','$fechaPlanilla','$valorPlanilla','Pendiente',
-             '$observaciones','$idSupervisor','$idContrato','$valorPlanillaReal','$encargado', '$idUsuario','$mas_cotizacion')";
+    header("location:nuevaActa.php?id=$idContrato&nombre=$NombreContratistas&NombreSupervisor=$NombreSupervisor&num_informe=$numInforme&mensaje=$message");
+    exit;
+}
 
-    $result = mysqli_query($conexion, $query); //or die ("No se puede establecer conexion con la DB en acta.");
-    // $result = false;
-    //echo mysqli_error($conexion);
-
-    //si todo fue correcto pasa
-    //Para realizar las Actividades---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------------------------------------------------------------------------------------------
-    if ($result) {
-
-        /// obtiene el último id del registro insertado
-        $idActa = $conexion->insert_id;
-
-        //insertamos las actividades 
-        for ($i = 0; $i < count($idAlcances); $i++) {
-            $actividad = mysqli_real_escape_string($conexion, $Actividades[$i]);
-            $ubicacion = mysqli_real_escape_string($conexion, $Ubicaciones[$i]);
-            $alcance = mysqli_real_escape_string($conexion, $idAlcances[$i]);
-        
-            // Insertar actividad
-            $query1 = "INSERT INTO actividad(`descripcion`, `ubicacion`, `numInforme`,`idActa`, `idAlcance`, `idContrato`) 
-                       VALUES ('$actividad','$ubicacion','$numInforme','$idActa','$alcance','$idContrato')";
-            if (!$result1=mysqli_query($conexion, $query1)) {
-                die("Error al insertar actividad: " . mysqli_error($conexion) . " - Consulta: $query1");
-            }
-        
-            // Verificar si la actividad tiene datos válidos para actualizar el impacto
-            if (!empty($actividad) && !empty($ubicacion)) {
-                $query2 = "UPDATE `alcance` SET `impacto`='Si' WHERE id = '$alcance'";
-                if (!$result2=mysqli_query($conexion, $query2)) {
-                    die("Error al actualizar impacto: " . mysqli_error($conexion) . " - Consulta: $query2");
-                }
-            }
-        }
-        
-        //Para realizar las Retenciones---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-
-        if ($result1) {
-            header("location:listarActas.php?id=" . $idContrato . "&nombre=" . $NombreContratistas . "&NombreSupervisor=" . $NombreSupervisor);
-        } else {
-?>
-<?php
-            ?>
-<h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LAS ACTIVIDADES</h1>
-<?php
-        }
-    } else {
-        ?>
-<?php
-        if (mysqli_error($conexion)) {
-            $message = "El acta ya ha sido creado";
-            header("location:nuevaActa.php?id=" . $idContrato . "&nombre=" . $NombreContratistas . "&NombreSupervisor=" . $NombreSupervisor . "&num_informe=" . $numInforme . "&mensaje=" . $message);
-            //echo "<br>". $message ;
-        }
-        ?>
-<h1 class="bad">ERROR EN LA AUTENTIFICACION PARA LAS ACTAS</h1>
-<?php
-    }
+// Validar y procesar ubicaciones
+foreach ($Ubicaciones as $i => $ubicacion) {
+    // Si el campo está vacío, asignar "NA"
+    $Ubicaciones[$i] = !empty(trim($ubicacion)) ? $ubicacion : 'NA';
 }
 
 
+// Iniciar transacción
+//Usa transacciones para garantizar que todas las operaciones se ejecuten correctamente o se reviertan en caso de fallo:
+mysqli_begin_transaction($conexion);
 
-//mysqli_free_result($resultado);
-ob_end_flush();
+try {
+    // Insertar acta
+    $query = "INSERT INTO acta (`num_informe`, `fecha_informe`, `fecha_ini`, `fecha_fin`, `diasPagos`, `valor`, `acumulado`, `saldo`, `numPlanilla`, `fechaPlanilla`,
+             `valorPlanilla`, `estado`, `observaciones`, `idSupervisor`, `idContrato`, `valorPlanillaReal`, `encargado`, `idUsuario`, `mas_cotizacion`) 
+             VALUES ('$numInforme', '$fecha_informe', '$fecha_ini', '$fecha_fin', '$diasPagos', '$valor', '$acumulado', '$saldo', '$numPlanilla', '$fechaPlanilla', 
+             '$valorPlanilla', 'Pendiente', '$observaciones', '$idSupervisor', '$idContrato', '$valorPlanillaReal', '$encargado', '$idUsuario', '$mas_cotizacion')";
+    $result = mysqli_query($conexion, $query);
+    if (!$result) {
+        die("Error en la consulta de insertar acta: " . mysqli_error($conexion));
+    }
+    $idActa = $conexion->insert_id;
+
+    // Insertar actividades y actualizar impacto
+    foreach ($idAlcances as $i => $alcance) {
+        $actividad = mysqli_real_escape_string($conexion, $Actividades[$i]);
+        $ubicacion = mysqli_real_escape_string($conexion, $Ubicaciones[$i]);
+
+        $query1 = "INSERT INTO actividad (descripcion, ubicacion, numInforme, idActa, idAlcance, idContrato) 
+                   VALUES ('$actividad', '$ubicacion', '$numInforme', '$idActa', '$alcance', '$idContrato')";
+       
+       $result1 = mysqli_query($conexion, $query1);
+        if (!$result1) {
+            die("Error en la consulta de insertar actividad: " . mysqli_error($conexion));
+        }
+
+        // Verificar si la actividad tiene datos válidos para actualizar el impacto
+        // Actualizar impacto si la ubicación no está vacía ni igual a "NA"
+        if ($ubicacion !== 'NA') {
+            $query2 = "UPDATE alcance SET impacto = 'Si' WHERE id = '$alcance'";
+            $result2 = mysqli_query($conexion, $query2);
+            
+            if (!$result2) {
+                die("Error en la consulta de actualizar impacto: " . mysqli_error($conexion));
+            }
+        }
+    }
+
+    // Confirmar transacción
+    mysqli_commit($conexion);
+    header("location:listarActas.php?id=$idContrato&nombre=$NombreContratistas&NombreSupervisor=$NombreSupervisor");
+    exit;
+} catch (Exception $e) {
+    mysqli_rollback($conexion);
+    die("Error en la transacción: " . $e->getMessage());
+}
+
+// Cerrar conexión
 mysqli_close($conexion);
+ob_end_flush();
 ?>

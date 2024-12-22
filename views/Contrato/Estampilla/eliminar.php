@@ -18,7 +18,7 @@ $NombreContratistas = $_GET["nombre"];
 
 include('../../../db.php');
 
-$query= "DELETE FROM `contrato_retencion` WHERE idRetencion = $idEstampilla";
+$query= "DELETE FROM `contrato_retencion` WHERE idRetencion = $idEstampilla AND idContrato = $idContrato ";
 $result = mysqli_query($conexion,$query) or die("fallo en la conexión");
 
 
@@ -26,10 +26,10 @@ if($result){
     header("location:listar.php?id=".$idContrato."&nombre=".$NombreContratistas);
 }else{
     ?>
-    <?php
+<?php
     ?>
-    <h1 class="bad">ERROR EN LA AUTENTIFICACION PARA EL ALCANCE</h1>
-    <?php
+<h1 class="bad">ERROR EN LA AUTENTIFICACION PARA EL ALCANCE</h1>
+<?php
 }
 //mysqli_free_result($resultado);
 mysqli_close($conexion);

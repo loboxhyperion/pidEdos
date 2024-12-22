@@ -2,7 +2,7 @@
 // antes de cualquier línea de código html o php:
 //evita que no se buque el header para redirigir a otra pagina
 ob_start();
-include('../../../db.php'); 
+include('../../../db.php');
 $idContrato = $_POST['idContrato'];
 $NombreContratistas = $_POST["nombre"];
 $NombreSupervisor = $_POST["nombreSupervisor"];
@@ -34,9 +34,9 @@ for($i = 0; $i < count($idAlcances); $i++){
 }
 */
 
-
 $query = "UPDATE `acta` SET `fecha_informe`='$fecha_informe',`numPlanilla`='$numPlanilla',`fechaPlanilla`='$fechaPlanilla',`valorPlanilla`='$valorPlanilla',
-         `observaciones`='$observaciones',`valorPlanillaReal`= $valorPlanillaReal,`mas_cotizacion`= $mas_cotizacion WHERE id = $idActa";
+         `valorPlanillaReal`='$valorPlanillaReal',`observaciones`='$observaciones',`mas_cotizacion`='$mas_cotizacion' WHERE id = $idActa";
+
 $result = mysqli_query($conexion,$query) or die ("No se puede establecer conexion con la DB en acta e.");
 
 
